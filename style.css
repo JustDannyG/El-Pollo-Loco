@@ -1,0 +1,14 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('/img/5_background/ChatGPT\ Image\ 30.\ Sept.\ 2025\,\ 16_27_55.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+canvas {
+    background-color: black;
+    border: 5px solid black;
+}
