@@ -4,12 +4,17 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 2;
     lastHit = 0;
+    isSplashing = false;
 
     applyGravatiy() {
         setInterval(() => {
+            if (this.isSplashing) return;
             if (this.isAboveGround() || this.speedY > 0) {
-                this.y -= this.speedY
+                this.y -= this.speedY - 10;
                 this.speedY -= this.acceleration;
+            }
+            if (this instanceof ThrowableObject && this.y >= 360) {
+                this.onGroundImpact();
             }
         }, 1000 / 25);
     };
@@ -31,7 +36,7 @@ class MovableObject extends DrawableObject {
     };
 
     jump() {
-        this.speedY = 24;
+        this.speedY = 34;
     };
 
     isColiding(mO) {
