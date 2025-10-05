@@ -35,14 +35,19 @@ class ThrowableObject extends MovableObject {
 
     animate() {
         this.flyInterval = setInterval(() => {
-            if (!this.isSplashing) {
+            if (!this.isSplashing && this.otherDirection == false) {
                 this.x += 10;
+                this.playAnimation(this.throwImages);
+            }
+            if (this.otherDirection == true) {
+                this.x -= 10;
                 this.playAnimation(this.throwImages);
             }
         }, 25);
     }
 
     onGroundImpact() {
+        this.stoAnimationtOtherDirection();
         this.isSplashing = true;
         let currentImage = 0;
         let animation = setInterval(() => {
@@ -58,5 +63,11 @@ class ThrowableObject extends MovableObject {
                 }
             }
         }, 100);
+    }
+
+    stoAnimationtOtherDirection() {
+        if (this.flyInterval) {
+            clearInterval(this.flyInterval);
+        }
     }
 };

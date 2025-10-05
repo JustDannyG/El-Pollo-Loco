@@ -45,15 +45,21 @@ class World {
     };
 
     checkThrowObjects() {
+        this.checkCharacterThrowDirection();
+        if (!this.keyboard.throw) {
+            this.throwPressed = false;
+        }
+    }
+
+    checkCharacterThrowDirection() {
         if (this.keyboard.throw && !this.throwPressed && this.bottlebar.percentage >= 20) {
-            let bottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            let x = this.character.otherDirection ? -100 : 100;
+            let bottle = new ThrowableObject(this.character.x + x, this.character.y + 100);
+            bottle.otherDirection = this.character.otherDirection;
             bottle.world = this;
             this.throwableObject.push(bottle);
             this.bottlebar.setPercentage(this.bottlebar.percentage - 20);
             this.throwPressed = true;
-        }
-        if (!this.keyboard.throw) {
-            this.throwPressed = false;
         }
     }
 
