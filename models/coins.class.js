@@ -11,6 +11,12 @@ class Coin extends DrawableObject {
 
     constructor() {
         super();
+        this.offset = {
+            top: 60,
+            left: 60,
+            right: 60,
+            bottom: 60
+        };
         this.loadImage(this.coinImages[0]);
         this.loadImages(this.coinImages);
         this.animate();

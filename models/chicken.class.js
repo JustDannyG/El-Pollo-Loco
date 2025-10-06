@@ -12,6 +12,12 @@ class Chicken extends MovableObject {
 
     constructor() {
         super();
+        this.offset = {
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: 10
+        };
         this.loadImage(this.imagesWalking[0]);
         this.loadImages(this.imagesWalking);
         this.animate();

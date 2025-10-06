@@ -19,6 +19,12 @@ class ThrowableObject extends MovableObject {
 
     constructor(x, y) {
         super();
+        this.offset = {
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: 10
+        };
         this.x = x;
         this.y = y;
         this.loadImage(this.throwImages[0]);

@@ -121,7 +121,6 @@ class World {
     addToMap(mO) {
         this.flipImage(mO);
         this.ctx.drawImage(mO.img, mO.x, mO.y, mO.width, mO.height);
-        mO.drawFrame(this.ctx);
         this.flipImageBack(mO);
     };
 

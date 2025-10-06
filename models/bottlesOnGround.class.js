@@ -10,6 +10,12 @@ class Bottle extends DrawableObject {
 
     constructor() {
         super();
+        this.offset = {
+            top: 10,
+            left: 15,
+            right: 15,
+            bottom: 10
+        };
         this.loadImage(this.bottleImages);
         this.x = 360 + Math.random() * 3600;
     }
