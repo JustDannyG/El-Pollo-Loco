@@ -49,6 +49,10 @@ class MovableObject extends DrawableObject {
     }
 
     hit() {
+        let now = new Date().getTime();
+        if (now - this.lastHit < 1000) {
+            return;
+        }
         this.energy -= 20;
         if (this.energy < 0) {
             this.energy = 0;
