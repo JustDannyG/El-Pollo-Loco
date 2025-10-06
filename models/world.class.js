@@ -53,7 +53,7 @@ class World {
 
     checkCharacterThrowDirection() {
         if (this.keyboard.throw && !this.throwPressed && this.bottlebar.percentage >= 20) {
-            let x = this.character.otherDirection ? -100 : 100;
+            let x = this.character.otherDirection ? -100 /* true */ : 100; // false
             let bottle = new ThrowableObject(this.character.x + x, this.character.y + 100);
             bottle.otherDirection = this.character.otherDirection;
             bottle.world = this;

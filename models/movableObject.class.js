@@ -40,11 +40,14 @@ class MovableObject extends DrawableObject {
     };
 
     isColiding(mO) {
-        return this.x + this.width > mO.x &&
-            this.y + this.height > mO.y &&
-            this.x < mO.x &&
-            this.y < mO.y + mO.height
-    };
+        const a = this.getHitbox();
+        const b = mO.getHitbox();
+
+        return a.x + a.width > b.x &&
+            a.y + a.height > b.y &&
+            a.x < b.x + b.width &&
+            a.y < b.y + b.height;
+    }
 
     hit() {
         this.energy -= 20;
