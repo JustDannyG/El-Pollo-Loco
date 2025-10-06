@@ -54,7 +54,7 @@ class World {
     checkCharacterThrowDirection() {
         if (this.keyboard.throw && !this.throwPressed && this.bottlebar.percentage >= 20) {
             let x = this.character.otherDirection ? -100 /* true */ : 100; // false
-            let bottle = new ThrowableObject(this.character.x + x, this.character.y + 100);
+            let bottle = new ThrowableObject(this.character.x + x, this.character.y + 120);
             bottle.otherDirection = this.character.otherDirection;
             bottle.world = this;
             this.throwableObject.push(bottle);
@@ -66,8 +66,16 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColiding(enemy)) {
-                this.character.hit();
-                this.statusbar.setPercentage(this.character.energy);
+                if (enemy.energy === 0) {
+                    return;
+                }
+                if (this.character.speedY < 0 && (this.character.y + this.character.height - 100) < enemy.y) {
+                    enemy.energy = 0;
+                    this.character.jump();
+                } else {
+                    this.character.hit();
+                    this.statusbar.setPercentage(this.character.energy);
+                }
             }
         });
     };
