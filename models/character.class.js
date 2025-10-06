@@ -43,7 +43,7 @@ class Character extends MovableObject {
         this.offset = {
             top: 120,
             left: 30,
-            right: 30,
+            right: 25,
             bottom: 10
         };
         this.loadImage(this.imagesWalking[0]);
