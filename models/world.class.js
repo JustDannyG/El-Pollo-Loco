@@ -3,6 +3,7 @@ class World {
     statusbar = new Statusbar();
     coinbar = new Coinbar();
     bottlebar = new Bottlebar();
+    statusbarEndboss = new StatusbarEndboss();
     startscreen = new Startscreen();
 
     throwableObject = [];
@@ -69,7 +70,7 @@ class World {
                 if (enemy.energy === 0) {
                     return;
                 }
-                if (this.character.speedY < 0 && (this.character.y + this.character.height - 120) < enemy.y) {
+                if (this.character.speedY < 0 && (this.character.y + this.character.height - 100) < enemy.y) { 
                     enemy.energy = 0;
                     //this.character.jump();
                 } else {
@@ -113,6 +114,7 @@ class World {
         this.addObjectToMap(this.throwableObject);
         this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
+        this.addToMap(this.statusbarEndboss);
         this.addToMap(this.statusbar);
         this.addToMap(this.coinbar);
         this.addToMap(this.bottlebar);

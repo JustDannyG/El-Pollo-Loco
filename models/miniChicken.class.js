@@ -1,7 +1,7 @@
 class MiniChicken extends MovableObject {
     
     y = 340;
-    height = 80;
+    height = 90;
     width = 80;
 
     imagesWalking = [
