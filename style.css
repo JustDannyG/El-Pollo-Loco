@@ -13,17 +13,22 @@ canvas {
   border: 5px solid black;
 }
 
+h1 {
+  font-family: 'Comic Sans MS';
+}
+
 p {
   color: white;
   font-size: 25px;
   margin: 0;
+  font-family: 'Comic Sans MS';
 }
 
 .guideMainContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 150px;
+  gap: 140px;
 }
 
 .guideSingleContainers {

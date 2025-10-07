@@ -69,9 +69,9 @@ class World {
                 if (enemy.energy === 0) {
                     return;
                 }
-                if (this.character.speedY < 0 && (this.character.y + this.character.height - 100) < enemy.y) {
+                if (this.character.speedY < 0 && (this.character.y + this.character.height - 120) < enemy.y) {
                     enemy.energy = 0;
-                    this.character.jump();
+                    //this.character.jump();
                 } else {
                     this.character.hit();
                     this.statusbar.setPercentage(this.character.energy);
