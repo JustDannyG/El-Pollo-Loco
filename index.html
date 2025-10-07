@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="./img/icon/ChatGPT Image 6. Okt. 2025, 17_49_07.png">
 
-    <link rel="stylesheet" href="style.css">
-    
     <script src="models/drawableObjects.class.js"></script>
     <script src="models/startscreen.class.js"></script>
     <script src="models/movableObject.class.js"></script>
@@ -31,6 +29,8 @@
 
     <script src="scripts/game.js"></script>
 
+    <link rel="stylesheet" href="style.css">
+
     <title>Document</title>
 </head>
 
@@ -38,10 +38,46 @@
 
     <h1>El Pollo Loco</h1>
 
-    <canvas id="canvas" width="720" height="480">
+    <canvas id="canvas" width="720" height="480"></canvas>
 
 
-    </canvas>
+    <div class="guideMainContainer">
+        <div class="guideSingleContainers">
+            <div class="upperGuidContainer">
+                <p>W</p>
+            </div>
+            <div class="fontContainer">
+                <p>Throw</p>
+            </div>
+        </div>
+        <div class="guideSingleContainers">
+            <div class="upperGuidContainer">
+                <p>A</p>
+            </div>
+            <div class="fontContainer">
+                <p>Left</p>
+            </div>
+        </div>
+        <div class="guideSingleContainers">
+            <div class="upperGuidContainer">
+                <p>D</p>
+            </div>
+            <div class="fontContainer">
+                <p>Right</p>
+            </div>
+        </div>
+        <div class="guideSingleContainers">
+            <div class="upperGuidContainer">
+                <p>Space</p>
+            </div>
+            <div class="fontContainer">
+                <p>Jump</p>
+            </div>
+        </div>
+    </div>
+
+
+
 
 </body>
 

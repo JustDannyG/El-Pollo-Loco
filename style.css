@@ -1,14 +1,52 @@
 body {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-image: url('/img/5_background/ChatGPT\ Image\ 30.\ Sept.\ 2025\,\ 16_27_55.png');
-    background-size: cover;
-    background-repeat: no-repeat;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url("./img/5_background/ChatGPT Image 30. Sept. 2025, 16_27_55.png");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 canvas {
-    background-color: black;
-    border: 5px solid black;
+  background-color: black;
+  border: 5px solid black;
+}
+
+p {
+  color: white;
+  font-size: 25px;
+  margin: 0;
+}
+
+.guideMainContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 150px;
+}
+
+.guideSingleContainers {
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.guideExplanation {
+  width: 60px;
+  height: 55px;
+}
+
+.upperGuidContainer {
+  background-color: #F48E16;
+  padding: 10px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
