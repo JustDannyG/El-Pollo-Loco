@@ -19,7 +19,6 @@ class World {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-
         this.startGame();
         this.draw();
     };
@@ -42,6 +41,7 @@ class World {
             this.checkThrowObjects();
             this.checkPickup(this.level.coins, this.coinbar);
             this.checkPickup(this.level.bottles, this.bottlebar);
+            this.checkBottleHitsEndboss();
         }, 200);
     };
 
@@ -70,9 +70,8 @@ class World {
                 if (enemy.energy === 0) {
                     return;
                 }
-                if (this.character.speedY < 0 && (this.character.y + this.character.height - 100) <= enemy.y) { 
+                if (this.character.speedY < 0 && (this.character.y + this.character.height - 100) <= enemy.y) {
                     enemy.energy = 0;
-                    //this.character.jump();
                 } else {
                     this.character.hit();
                     this.statusbar.setPercentage(this.character.energy);
@@ -80,6 +79,21 @@ class World {
             }
         });
     };
+
+    checkBottleHitsEndboss() {
+        this.throwableObject.forEach((bottle) => {
+            if (bottle.isSplashing) return;
+            this.level.enemies.forEach((enemy) => {
+                if (enemy instanceof Endboss) {
+                    if (bottle.isColiding(enemy)) {
+                        bottle.onGroundImpact();
+                        this.statusbarEndboss.setPercentage(this.statusbarEndboss.percentage - 20);
+                    }
+                }
+            });
+        });
+    }
+
 
     checkPickup(objects, bar) {
         objects.forEach((obj, index) => {
@@ -131,6 +145,7 @@ class World {
     addToMap(mO) {
         this.flipImage(mO);
         this.ctx.drawImage(mO.img, mO.x, mO.y, mO.width, mO.height);
+        /* mO.drawFrame(this.ctx); */
         this.flipImageBack(mO);
     };
 
