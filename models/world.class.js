@@ -70,7 +70,7 @@ class World {
                 if (enemy.energy === 0) {
                     return;
                 }
-                if (this.character.speedY < 0 && (this.character.y + this.character.height - 100) < enemy.y) { 
+                if (this.character.speedY < 0 && (this.character.y + this.character.height - 100) <= enemy.y) { 
                     enemy.energy = 0;
                     //this.character.jump();
                 } else {

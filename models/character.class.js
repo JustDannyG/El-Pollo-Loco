@@ -4,8 +4,8 @@ class Character extends MovableObject {
     speed = 10;
     world;
     energy = 100;
-    idleTicks = 0; 
-    idleThreshold = 40; 
+    idleTicks = 0;
+    idleThreshold = 40;
 
     imagesIdle = [
         './img/2_character_pepe/1_idle/idle/I-1.png',
@@ -69,10 +69,16 @@ class Character extends MovableObject {
         super();
         this.offset = {
             top: 120,
-            left: 30,
+            left: 20,
             right: 25,
             bottom: 10
         };
+        this.loadAllImages();
+        this.applyGravatiy();
+        this.animate();
+    };
+
+    loadAllImages() {
         this.loadImage(this.imagesIdle[0]);
         this.loadImages(this.imagesIdle);
         this.loadImages(this.imagesIdleLong);
@@ -80,12 +86,14 @@ class Character extends MovableObject {
         this.loadImages(this.imagesJumping);
         this.loadImages(this.imagesHurt);
         this.loadImages(this.imagesDead);
-        this.applyGravatiy();
-        this.animate();
     };
 
     animate() {
+        this.isAnimationPlayed();
+        this.startAnimations();
+    };
 
+    isAnimationPlayed() {
         setInterval(() => {
             if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
                 this.moveRight();
@@ -100,7 +108,9 @@ class Character extends MovableObject {
             }
             this.world.camera_x = -this.x + 120;
         }, 1000 / 60);
+    }
 
+    startAnimations() {
         setInterval(() => {
             if (this.isDead()) {
                 this.idleTicks = 0;
@@ -123,6 +133,6 @@ class Character extends MovableObject {
                 }
             }
         }, 1000 / 10);
-    };
+    }
 
 };

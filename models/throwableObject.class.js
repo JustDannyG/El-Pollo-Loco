@@ -41,19 +41,27 @@ class ThrowableObject extends MovableObject {
 
     animate() {
         this.flyInterval = setInterval(() => {
-            if (!this.isSplashing && this.otherDirection == false) {
-                this.x += 10;
-                this.playAnimation(this.throwImages);
-            }
-            if (this.otherDirection == true) {
-                this.x -= 10;
-                this.playAnimation(this.throwImages);
-            }
+            this.throwBottleRight();
+            this.throwBottleLeft();
         }, 25);
     }
 
+    throwBottleRight() {
+        if (!this.isSplashing && this.otherDirection == false) {
+            this.x += 10;
+            this.playAnimation(this.throwImages);
+        }
+    }
+
+    throwBottleLeft() {
+        if (this.otherDirection == true) {
+            this.x -= 10;
+            this.playAnimation(this.throwImages);
+        }
+    }
+
     onGroundImpact() {
-        this.stoAnimationtOtherDirection();
+        this.stopAnimationtOtherDirection();
         this.isSplashing = true;
         let currentImage = 0;
         let animation = setInterval(() => {
@@ -71,7 +79,7 @@ class ThrowableObject extends MovableObject {
         }, 100);
     }
 
-    stoAnimationtOtherDirection() {
+    stopAnimationtOtherDirection() {
         if (this.flyInterval) {
             clearInterval(this.flyInterval);
         }
