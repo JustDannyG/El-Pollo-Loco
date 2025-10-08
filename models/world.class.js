@@ -30,6 +30,7 @@ class World {
             initLevel();
             this.level = level1;
             this.character = new Character();
+            this.endboss = new Endboss();
             this.setWorld();
             this.run();
         };
@@ -46,13 +47,13 @@ class World {
     };
 
     checkThrowObjects() {
-        this.checkCharacterThrowDirection();
+        this.checkCharacterThrowAndDirection();
         if (!this.keyboard.throw) {
             this.throwPressed = false;
         }
     }
 
-    checkCharacterThrowDirection() {
+    checkCharacterThrowAndDirection() {
         if (this.keyboard.throw && !this.throwPressed && this.bottlebar.percentage >= 20) {
             let x = this.character.otherDirection ? -100 /* true */ : 100; // false
             let bottle = new ThrowableObject(this.character.x + x, this.character.y + 120);
@@ -84,15 +85,15 @@ class World {
         this.throwableObject.forEach((bottle) => {
             if (bottle.isSplashing) return;
             this.level.enemies.forEach((enemy) => {
-                if (enemy instanceof Endboss) {
-                    if (bottle.isColiding(enemy)) {
-                        bottle.onGroundImpact();
-                        this.statusbarEndboss.setPercentage(this.statusbarEndboss.percentage - 20);
-                    }
+                if (enemy instanceof Endboss && bottle.isColiding(enemy)) {
+                    bottle.onGroundImpact();
+                    enemy.hit();
+                    this.statusbarEndboss.setPercentage(enemy.energy);
                 }
             });
         });
     }
+
 
 
     checkPickup(objects, bar) {

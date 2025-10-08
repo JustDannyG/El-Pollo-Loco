@@ -89,11 +89,11 @@ class Character extends MovableObject {
     };
 
     animate() {
-        this.isAnimationPlayed();
-        this.startAnimations();
+        this.reasonForAnimation();
+        this.startAnimation();
     };
 
-    isAnimationPlayed() {
+    reasonForAnimation() {
         setInterval(() => {
             if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
                 this.moveRight();
@@ -110,7 +110,7 @@ class Character extends MovableObject {
         }, 1000 / 60);
     }
 
-    startAnimations() {
+    startAnimation() {
         setInterval(() => {
             if (this.isDead()) {
                 this.idleTicks = 0;
