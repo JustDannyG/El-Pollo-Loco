@@ -113,7 +113,7 @@ class World {
     draw() {
         if (!this.level) {
             this.addToMap(this.startscreen);
-            requestAnimationFrame(() => this.draw());
+            if (!this.gameOver) requestAnimationFrame(() => this.draw());
             return;
         }
         this.addObjectsToMap();
@@ -134,9 +134,24 @@ class World {
         this.addToMap(this.statusbar);
         this.addToMap(this.coinbar);
         this.addToMap(this.bottlebar);
+        this.checkGameEnd();
         let self = this;
         requestAnimationFrame(function () { self.draw(); });
     };
+
+    checkGameEnd() {
+        this.showGameOverScreen();
+    }
+
+    showGameOverScreen() {
+        if (this.endboss && this.endboss.energy == 0) {
+            this.gameOver = true;
+            let endscreen = new Endscreen();
+            this.addToMap(endscreen);
+            return;
+        }
+    }
+
 
     addObjectToMap(objects) {
         objects.forEach(obj => {

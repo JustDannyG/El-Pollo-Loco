@@ -55,6 +55,7 @@ class Endboss extends MovableObject {
             right: 30,
             bottom: 20
         };
+        this.deathFallingStarted = false;
         this.loadAllImages();
         this.speed = 10;
         this.animate();
@@ -80,6 +81,10 @@ class Endboss extends MovableObject {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.imagesDead);
+                if (!this.deathFallingStarted) {
+                    this.deathFallingStarted = true;
+                    this.startDeathFall();
+                }
                 return;
             }
             if (this.isHurt()) {
@@ -97,5 +102,17 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.imagesWalking);
             }
         }, 1000 / 10);
+    }
+
+    startDeathFall() {
+        let fallInterval = setInterval(() => {
+            this.y += 5;
+            if (this.y >= this.y + 200) {
+                clearInterval(fallInterval);
+                if (this.world && this.world.endGame) {
+                    this.world.endGame();
+                }
+            }
+        }, 1000 / 60);
     }
 };
