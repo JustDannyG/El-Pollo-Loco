@@ -74,7 +74,7 @@ class Character extends MovableObject {
             bottom: 10
         };
         this.loadAllImages();
-        this.applyGravatiy();
+        this.applyGravity();
         this.animate();
     };
 
@@ -115,6 +115,7 @@ class Character extends MovableObject {
             if (this.isDead()) {
                 this.idleTicks = 0;
                 this.playAnimation(this.imagesDead);
+                this.speedY = -34; 
             } else if (this.isHurt()) {
                 this.idleTicks = 0;
                 this.playAnimation(this.imagesHurt);
@@ -134,5 +135,4 @@ class Character extends MovableObject {
             }
         }, 1000 / 10);
     }
-
 };

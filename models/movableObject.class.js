@@ -6,7 +6,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     isSplashing = false;
 
-    applyGravatiy() {
+    applyGravity() {
         setInterval(() => {
             if (this.isSplashing) return;
             if (this.isAboveGround() || this.speedY > 0) {
@@ -41,10 +41,10 @@ class MovableObject extends DrawableObject {
 
     isColiding(mO) {
         return (
-            this.x + this.width - this.offset.right > mO.x + mO.offset.left && 
-            this.y + this.height - this.offset.bottom > mO.y + mO.offset.top && 
-            this.x + this.offset.left < mO.x + mO.width - mO.offset.right && 
-            this.y + this.offset.top < mO.y + mO.height - mO.offset.bottom 
+            this.x + this.width - this.offset.right > mO.x + mO.offset.left &&
+            this.y + this.height - this.offset.bottom > mO.y + mO.offset.top &&
+            this.x + this.offset.left < mO.x + mO.width - mO.offset.right &&
+            this.y + this.offset.top < mO.y + mO.height - mO.offset.bottom
         );
     }
 

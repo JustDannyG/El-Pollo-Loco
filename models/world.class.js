@@ -94,8 +94,6 @@ class World {
         });
     }
 
-
-
     checkPickup(objects, bar) {
         objects.forEach((obj, index) => {
             if (this.character.isColiding(obj)) {
