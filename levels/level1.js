@@ -80,7 +80,8 @@ function initLevel() {
             new Bottle()
         ],
         [
-            new Endscreen()
+            new YouWonScreen(),
+            new GameOverScreen()
         ],
     );
 };

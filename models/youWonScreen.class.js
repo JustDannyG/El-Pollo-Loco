@@ -1,4 +1,4 @@
-class Endscreen extends MovableObject {
+class YouWonScreen extends MovableObject {
 
     y = 0;
     x = 0;

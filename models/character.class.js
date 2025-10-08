@@ -73,6 +73,7 @@ class Character extends MovableObject {
             right: 25,
             bottom: 10
         };
+        this.deathFallingStarted = false;
         this.loadAllImages();
         this.applyGravity();
         this.animate();
@@ -115,7 +116,10 @@ class Character extends MovableObject {
             if (this.isDead()) {
                 this.idleTicks = 0;
                 this.playAnimation(this.imagesDead);
-                this.speedY = -34; 
+                if (!this.deathFallingStarted) {
+                    this.deathFallingStarted = true;
+                    this.startDeathFall();
+                }
             } else if (this.isHurt()) {
                 this.idleTicks = 0;
                 this.playAnimation(this.imagesHurt);
@@ -134,5 +138,11 @@ class Character extends MovableObject {
                 }
             }
         }, 1000 / 10);
+    }
+
+    startDeathFall() {
+        setInterval(() => {
+            this.y += 5;
+        }, 1000 / 60);
     }
 };

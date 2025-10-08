@@ -73,7 +73,7 @@ class Endboss extends MovableObject {
     animate() {
         setInterval(() => {
             if (this.x - this.world.character.x > 360) {
-                this.otherDirection = false; 
+                this.otherDirection = false;
                 this.moveLeft();
             }
         }, 1000 / 20);
@@ -105,14 +105,8 @@ class Endboss extends MovableObject {
     }
 
     startDeathFall() {
-        let fallInterval = setInterval(() => {
+        setInterval(() => {
             this.y += 5;
-            if (this.y >= this.y + 200) {
-                clearInterval(fallInterval);
-                if (this.world && this.world.endGame) {
-                    this.world.endGame();
-                }
-            }
         }, 1000 / 60);
     }
 };

@@ -140,17 +140,27 @@ class World {
     };
 
     checkGameEnd() {
+        this.showYouWonScreen();
         this.showGameOverScreen();
     }
 
-    showGameOverScreen() {
+    showYouWonScreen() {
         if (this.endboss && this.endboss.energy == 0) {
             this.gameOver = true;
-            let endscreen = new Endscreen();
-            this.addToMap(endscreen);
+            let youWonScreen = new YouWonScreen();
+            this.addToMap(youWonScreen);
+            return;
+        } 
+    }
+
+    showGameOverScreen() {
+        if (this.character.energy == 0) {
+            this.gameOver = true;
+            let gameOverScreen = new GameOverScreen();
+            this.addToMap(gameOverScreen);
             return;
         }
-    }
+    };
 
 
     addObjectToMap(objects) {
@@ -162,7 +172,6 @@ class World {
     addToMap(mO) {
         this.flipImage(mO);
         this.ctx.drawImage(mO.img, mO.x, mO.y, mO.width, mO.height);
-        /* mO.drawFrame(this.ctx); */
         this.flipImageBack(mO);
     };
 
