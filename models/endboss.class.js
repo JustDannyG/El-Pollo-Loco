@@ -56,6 +56,7 @@ class Endboss extends MovableObject {
             bottom: 20
         };
         this.loadAllImages();
+        this.speed = 10;
         this.animate();
     }
 
@@ -69,19 +70,32 @@ class Endboss extends MovableObject {
     }
 
     animate() {
-        this.startAnimation();
-    };
+        setInterval(() => {
+            if (this.x - this.world.character.x > 360) {
+                this.otherDirection = false; 
+                this.moveLeft();
+            }
+        }, 1000 / 20);
 
-    startAnimation() {
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.imagesDead);
-            } else if (this.isHurt()) {
+                return;
+            }
+            if (this.isHurt()) {
                 this.playAnimation(this.imagesHurt);
+                return;
+            }
+            if (!this.world || !this.world.character) {
+                this.playAnimation(this.imagesWalking);
+                return;
+            }
+            let distance = Math.abs(this.x - this.world.character.x);
+            if (distance <= 360) {
+                this.playAnimation(this.imagesAlert);
             } else {
                 this.playAnimation(this.imagesWalking);
             }
         }, 1000 / 10);
     }
-
 };

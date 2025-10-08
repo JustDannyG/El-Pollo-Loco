@@ -30,7 +30,6 @@ class World {
             initLevel();
             this.level = level1;
             this.character = new Character();
-            this.endboss = new Endboss();
             this.setWorld();
             this.run();
         };
@@ -105,6 +104,10 @@ class World {
 
     setWorld() {
         this.character.world = this;
+        this.level.enemies.forEach(e => {
+            e.world = this;
+            if (e instanceof Endboss) this.endboss = e;
+        });
     };
 
     draw() {
