@@ -79,7 +79,11 @@ class World {
                 if (this.character.speedY < 0 && (this.character.y + this.character.height - 100) <= enemy.y) {
                     enemy.energy = 0;
                 } else {
-                    this.character.hit();
+                    if (enemy instanceof Endboss) {
+                        this.character.hitByEndboss();
+                    } else {
+                        this.character.hit();
+                    }
                     this.statusbar.setPercentage(this.character.energy);
                 }
             }
