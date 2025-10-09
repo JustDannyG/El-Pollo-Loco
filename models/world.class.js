@@ -37,6 +37,7 @@ class World {
 
     run() {
         setInterval(() => {
+            if (window.gameStopped) return; // stop background checks when game stopped
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkPickup(this.level.coins, this.coinbar);
@@ -149,6 +150,7 @@ class World {
             this.gameOver = true;
             let youWonScreen = new YouWonScreen();
             this.addToMap(youWonScreen);
+            window.gameStopped = true;
             return;
         } 
     }
@@ -158,6 +160,7 @@ class World {
             this.gameOver = true;
             let gameOverScreen = new GameOverScreen();
             this.addToMap(gameOverScreen);
+            window.gameStopped = true;
             return;
         }
     };

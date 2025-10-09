@@ -1,9 +1,9 @@
 class GameOverScreen extends MovableObject {
 
-    y = 0;
-    x = 0;
-    height = 480;
-    width = 720;
+    y = 120;
+    x = 180;
+    height = 240;
+    width = 360;
 
     constructor() {
         super();
