@@ -15,15 +15,21 @@ class World {
     mouseClicked = false;
     throwPressed = false;
 
+    intervalId = null;
+    rafId = null;
+    running = false;
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.running = true;
         this.startGame();
         this.draw();
     };
 
     startGame() {
+        this.hidePlayAgainButton();
         this.canvas.onclick = () => {
             this.mouseClicked = true;
             this.canvas.onclick = null;
@@ -36,8 +42,7 @@ class World {
     }
 
     run() {
-        setInterval(() => {
-            if (window.gameStopped) return; // stop background checks when game stopped
+        this.intervalId = setInterval(() => {
             this.checkCollisions();
             this.checkThrowObjects();
             this.checkPickup(this.level.coins, this.coinbar);
@@ -55,7 +60,7 @@ class World {
 
     checkCharacterThrowAndDirection() {
         if (this.keyboard.throw && !this.throwPressed && this.bottlebar.percentage >= 20) {
-            let x = this.character.otherDirection ? -100 /* true */ : 100; // false
+            let x = this.character.otherDirection ? -100 : 100;
             let bottle = new ThrowableObject(this.character.x + x, this.character.y + 120);
             bottle.otherDirection = this.character.otherDirection;
             bottle.world = this;
@@ -112,9 +117,10 @@ class World {
     };
 
     draw() {
+        if (!this.running) return;
         if (!this.level) {
             this.addToMap(this.startscreen);
-            if (!this.gameOver) requestAnimationFrame(() => this.draw());
+            requestAnimationFrame(() => this.draw());
             return;
         }
         this.addObjectsToMap();
@@ -150,9 +156,12 @@ class World {
             this.gameOver = true;
             let youWonScreen = new YouWonScreen();
             this.addToMap(youWonScreen);
-            window.gameStopped = true;
+            this.showPlayAgainButton();
+            setTimeout(() => {
+                this.stop();
+            }, 1000);
             return;
-        } 
+        }
     }
 
     showGameOverScreen() {
@@ -160,11 +169,32 @@ class World {
             this.gameOver = true;
             let gameOverScreen = new GameOverScreen();
             this.addToMap(gameOverScreen);
-            window.gameStopped = true;
+            this.showPlayAgainButton();
+            setTimeout(() => {
+                this.stop();
+            }, 1000);
             return;
         }
     };
 
+    stop() {
+        if (this.intervalId) {
+            clearInterval(this.intervalId);
+            this.intervalId = null;
+        }
+        this.running = false;
+        this.rafId = null;
+    }
+
+    showPlayAgainButton() {
+        let btn = document.getElementById('playAgainBtn');
+        btn.style.display = 'block';
+    }
+
+    hidePlayAgainButton() {
+        let btn = document.getElementById('playAgainBtn');
+        btn.style.display = 'none';
+    };
 
     addObjectToMap(objects) {
         objects.forEach(obj => {

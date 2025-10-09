@@ -55,3 +55,18 @@ p {
   flex-direction: column;
   align-items: center;
 }
+
+/* Play again button styles */
+#playAgainBtn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 12px 20px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: none;
+  background-color: #F48E16;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
