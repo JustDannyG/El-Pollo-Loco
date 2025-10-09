@@ -1,9 +1,9 @@
 class Endboss extends MovableObject {
 
-    y = 92;
+    y = 88;
     x = 4680;
-    height = 360;
-    width = 330;
+    height = 330;
+    width = 300;
     energy = 100;
 
     imagesWalking = [
@@ -58,6 +58,7 @@ class Endboss extends MovableObject {
         this.deathFallingStarted = false;
         this.loadAllImages();
         this.speed = 10;
+        this.applyGravity();
         this.animate();
     }
 
@@ -89,6 +90,9 @@ class Endboss extends MovableObject {
             }
             if (this.isHurt()) {
                 this.playAnimation(this.imagesHurt);
+                if ((this.energy === 80 || this.energy === 60 || this.energy === 40 || this.energy === 20) && !this.attacking) {
+                    setTimeout(() => this.startAttack(), 500);
+                }
                 return;
             }
             if (!this.world || !this.world.character) {
@@ -108,5 +112,13 @@ class Endboss extends MovableObject {
         setInterval(() => {
             this.y += 5;
         }, 1000 / 60);
+    }
+
+    startAttack() {
+        this.playAnimation(this.imagesAttack);
+        this.speedY = 25;
+        for (let i = 0; i < 12; i++) {
+            setTimeout(() => this.moveLeft(), i * 16);
+        }
     }
 };

@@ -143,7 +143,7 @@ class World {
         this.addToMap(this.bottlebar);
         this.checkGameEnd();
         let self = this;
-        requestAnimationFrame(function () { self.draw(); });
+        requestAnimationFrame(() => { self.draw(); });
     };
 
     checkGameEnd() {
