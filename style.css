@@ -138,6 +138,28 @@ p {
   padding: 0 32px 0 32px;
 }
 
+/* Overlay styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.overlayContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  height: 50%;
+}
+
 .leftRightContainer {
   position: absolute;
   left: 12%;
@@ -164,13 +186,15 @@ p {
     margin: 0 auto;
     box-sizing: border-box;
   }
+
+  .fullscreenBtn {
+    bottom: 4px;
+  }
 }
 
 @media only screen and (max-height: 480px) {
   canvas {
     max-height: 100vh;
-    width: auto;
-    max-width: 100%;
-    height: auto;
+    max-width: 100vw;
   }
 }

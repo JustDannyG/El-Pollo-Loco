@@ -41,7 +41,7 @@
 
     <h1>El Pollo Loco</h1>
 
-    <p class="howToStartGame">press to start</p>
+    <p id="howToStartGame" class="howToStartGame">press to start</p>
 
     <div id="fullscreen">
         <canvas id="canvas" width="720" height="480"></canvas>
@@ -95,10 +95,10 @@
         <div id="mobileControls" class="mobileControls">
             <div class="leftRightContainer">
                 <button class="mobileBtn" id="leftBtn">
-                    <p class="mobileBtnLeftRightThrow"><</p>
+                    <p class="mobileBtnLeftRightThrow"> < </p>
                 </button>
                 <button class="mobileBtn" id="rightBtn">
-                    <p class="mobileBtnLeftRightThrow">></p>
+                    <p class="mobileBtnLeftRightThrow"> > </p>
                 </button>
             </div>
 
@@ -112,6 +112,12 @@
 
             </div>
 
+        </div>
+
+        <div id="overlay" class="overlay hidden" onclick="hideOverlayOnMobile()">
+            <div class="overlayContent">
+                <p>Turn your Device to play</p>
+            </div>
         </div>
 
 </body>

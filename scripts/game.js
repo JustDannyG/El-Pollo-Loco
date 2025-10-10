@@ -96,26 +96,48 @@ function hideFullscreenBtnAddSmallscreenBtn() {
     if (smallBtn) smallBtn.style.display = 'none';
 };
 
+window.addEventListener('resize', () => {
+    checkIfMobile();
+});
+
 function checkIfMobile() {
-    // überprüfe ob sich die breite des bildschirmes geringer als 720px ist
-    if (window.innerWidth < 720) {
+    if (window.innerWidth <= 720) {
         showMobileControls();
+        showOverlayOnMobile();
     } else {
         hideMobileControls();
+        hideOverlayOnMobile();
     }
-}
+};
 
 function showMobileControls() {
     let mobileControls = document.getElementById('mobileControls');
+    if (mobileControls) mobileControls.style.display = 'flex';
     let guideMainContainer = document.getElementById('guideMainContainer');
     if (guideMainContainer) guideMainContainer.style.display = 'none';
-    if (mobileControls) mobileControls.style.display = 'flex';
-}
+    let howToStartGame = document.getElementById('howToStartGame');
+    if (howToStartGame) howToStartGame.style.display = 'none';
+    let h1Element = document.querySelector('h1');
+    if (h1Element) h1Element.style.display = 'none';
+};
 
 function hideMobileControls() {
     let mobileControls = document.getElementById('mobileControls');
+    if (mobileControls) mobileControls.style.display = 'none';
     let guideMainContainer = document.getElementById('guideMainContainer');
     if (guideMainContainer) guideMainContainer.style.display = 'flex';
-    if (mobileControls) mobileControls.style.display = 'none';
+    let howToStartGame = document.getElementById('howToStartGame');
+    if (howToStartGame) howToStartGame.style.display = 'block';
+    let h1Element = document.querySelector('h1');
+    if (h1Element) h1Element.style.display = 'block';
 };
 
+function showOverlayOnMobile() {
+    let overlay = document.getElementById('overlay');
+    if (overlay) overlay.style.display = 'block';
+};
+
+function hideOverlayOnMobile() {
+    let overlay = document.getElementById('overlay');
+    if (overlay) overlay.style.display = 'none';
+};
