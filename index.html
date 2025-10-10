@@ -41,45 +41,54 @@
 
     <h1>El Pollo Loco</h1>
 
-    <canvas id="canvas" width="720" height="480"></canvas>
+    <div id="fullscreen">
+        <canvas id="canvas" width="720" height="480"></canvas>
 
-    <button id="playAgainBtn" style="display: none;" onclick="init()">Play again</button>
+    <button id="playAgainBtn" class="playAgainBtn hidden" onclick="init()">Play again</button>
 
-    <div class="guideMainContainer">
-        <div class="guideSingleContainers">
-            <div class="upperGuidContainer">
-                <p>A</p>
+        <button class="fullscreenBtn" id="fullscreenBtn" onclick="openFullscreen()">
+            <img id="fullscreenImg" src="./img/icon/fullscreen-enter.svg" alt="Fullscreen Button">
+        </button>
+
+        <button class="smallScreenBtn" id="smallScreenBtn" onclick="closeFullscreen()">
+            <img id="smallScreenImg" class="smallScreenBtnImg" src="./img/icon/fullscreen-inward-true.svg" alt="Fullscreen Button">
+        </button>
+
+        <div class="guideMainContainer">
+            <div class="guideSingleContainers">
+                <div class="upperGuidContainer">
+                    <p>A</p>
+                </div>
+                <div class="fontContainer">
+                    <p>Left</p>
+                </div>
             </div>
-            <div class="fontContainer">
-                <p>Left</p>
+            <div class="guideSingleContainers">
+                <div class="upperGuidContainer">
+                    <p>D</p>
+                </div>
+                <div class="fontContainer">
+                    <p>Right</p>
+                </div>
             </div>
-        </div>
-        <div class="guideSingleContainers">
-            <div class="upperGuidContainer">
-                <p>D</p>
+            <div class="guideSingleContainers">
+                <div class="upperGuidContainer">
+                    <p>W</p>
+                </div>
+                <div class="fontContainer">
+                    <p>Throw</p>
+                </div>
             </div>
-            <div class="fontContainer">
-                <p>Right</p>
-            </div>
-        </div>
-        <div class="guideSingleContainers">
-            <div class="upperGuidContainer">
-                <p>W</p>
-            </div>
-            <div class="fontContainer">
-                <p>Throw</p>
-            </div>
-        </div>
-        <div class="guideSingleContainers">
-            <div class="upperGuidContainer">
-                <p>Space</p>
-            </div>
-            <div class="fontContainer">
-                <p>Jump</p>
+            <div class="guideSingleContainers">
+                <div class="upperGuidContainer">
+                    <p>Space</p>
+                </div>
+                <div class="fontContainer">
+                    <p>Jump</p>
+                </div>
             </div>
         </div>
     </div>
-
 
 
 

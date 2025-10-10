@@ -56,10 +56,9 @@ p {
   align-items: center;
 }
 
-/* Play again button styles */
-#playAgainBtn {
+.playAgainBtn {
   position: absolute;
-  top: 50%;
+  top: 16%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 12px 20px;
@@ -68,5 +67,42 @@ p {
   border: none;
   background-color: #F48E16;
   cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.fullscreenBtn {
+  position: absolute;
+  bottom: 112px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 20;
+}
+
+.smallScreenBtn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 20;
+  display: none;
+}
+
+.smallScreenBtnImg {
+  width: 48px;
+  height: 48px;
+}
+
+#fullscreen {
+  position: relative;
+  display: inline-block;
+}
+
+.hidden {
+  display: none;
 }

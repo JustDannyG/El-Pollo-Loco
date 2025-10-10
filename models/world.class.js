@@ -192,12 +192,12 @@ class World {
 
     showPlayAgainButton() {
         let btn = document.getElementById('playAgainBtn');
-        btn.style.display = 'block';
+        btn.classList.remove('hidden');
     }
 
     hidePlayAgainButton() {
         let btn = document.getElementById('playAgainBtn');
-        btn.style.display = 'none';
+        btn.classList.add('hidden');
     };
 
     addObjectToMap(objects) {

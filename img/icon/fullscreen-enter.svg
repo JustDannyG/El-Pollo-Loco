@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+  <!-- Enter Fullscreen (expand to corners) -->
+  <path d="M3 9V4h5"/>
+  <path d="M3 4l6 6"/>
+  <path d="M21 9V4h-5"/>
+  <path d="M21 4l-6 6"/>
+  <path d="M3 15v5h5"/>
+  <path d="M3 20l6-6"/>
+  <path d="M21 15v5h-5"/>
+  <path d="M21 20l-6-6"/>
+</svg>
