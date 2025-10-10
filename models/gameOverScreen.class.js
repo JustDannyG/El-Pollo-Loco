@@ -7,6 +7,6 @@ class GameOverScreen extends MovableObject {
 
     constructor() {
         super();
-        this.loadImage('/img/You won, you lost/Game Over.png');
+        this.loadImage('./img/You won, you lost/Game Over.png');
     };
 }

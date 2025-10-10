@@ -11,6 +11,11 @@ body {
 canvas {
   background-color: black;
   border: 5px solid black;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  margin: 0 auto;
 }
 
 h1 {
@@ -24,11 +29,19 @@ p {
   font-family: 'Comic Sans MS';
 }
 
+.howToStartGame {
+  padding-bottom: 12px;
+  color: black;
+  font-weight: 600;
+}
+
 .guideMainContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 140px;
+  padding-left: 12px;
+  padding-right: 12px;
 }
 
 .guideSingleContainers {
@@ -105,4 +118,23 @@ p {
 
 .hidden {
   display: none;
+}
+
+@media only screen and (max-width: 720px) {
+  canvas {
+    width: calc(100vw - 1px);
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+}
+
+@media only screen and (max-height: 480px) {
+  canvas {
+    max-height: 100vh;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+  }
 }
