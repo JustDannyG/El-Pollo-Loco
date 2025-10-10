@@ -6,6 +6,7 @@ let fullscreen = false;
 
 function init() {
     canvas = document.getElementById('canvas');
+    checkIfMobile();
     if (world && world.stop) {
         world.stop();
     }
@@ -94,3 +95,27 @@ function hideFullscreenBtnAddSmallscreenBtn() {
     if (fsBtn) fsBtn.style.display = 'block';
     if (smallBtn) smallBtn.style.display = 'none';
 };
+
+function checkIfMobile() {
+    // überprüfe ob sich die breite des bildschirmes geringer als 720px ist
+    if (window.innerWidth < 720) {
+        showMobileControls();
+    } else {
+        hideMobileControls();
+    }
+}
+
+function showMobileControls() {
+    let mobileControls = document.getElementById('mobileControls');
+    let guideMainContainer = document.getElementById('guideMainContainer');
+    if (guideMainContainer) guideMainContainer.style.display = 'none';
+    if (mobileControls) mobileControls.style.display = 'flex';
+}
+
+function hideMobileControls() {
+    let mobileControls = document.getElementById('mobileControls');
+    let guideMainContainer = document.getElementById('guideMainContainer');
+    if (guideMainContainer) guideMainContainer.style.display = 'flex';
+    if (mobileControls) mobileControls.style.display = 'none';
+};
+

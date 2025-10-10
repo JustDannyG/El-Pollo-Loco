@@ -120,6 +120,42 @@ p {
   display: none;
 }
 
+.mobileBtn {
+  background-color: #F48E16;
+  border: 2px solid black;
+  border-radius: 24px;
+  height: 48px;
+  width: 48px;
+}
+
+.mobileBtnLeftRightThrow {
+  margin-block-start: -4px;
+}
+
+.mobileControls {
+  display: flex;
+  gap: 230px;
+  padding: 0 32px 0 32px;
+}
+
+.leftRightContainer {
+  position: absolute;
+  left: 12%;
+  bottom: 2%;
+  display: flex;
+  gap: 36px;
+  z-index: 20;
+}
+
+.jumpThrowContainer {
+  position: absolute;
+  right: 12%;
+  bottom: 2%;
+  display: flex;
+  gap: 36px;
+  z-index: 20;
+}
+
 @media only screen and (max-width: 720px) {
   canvas {
     width: calc(100vw - 1px);

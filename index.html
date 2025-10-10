@@ -46,17 +46,18 @@
     <div id="fullscreen">
         <canvas id="canvas" width="720" height="480"></canvas>
 
-    <button id="playAgainBtn" class="playAgainBtn hidden" onclick="init()">Play again</button>
+        <button id="playAgainBtn" class="playAgainBtn hidden" onclick="init()">Play again</button>
 
         <button class="fullscreenBtn" id="fullscreenBtn" onclick="openFullscreen()">
             <img id="fullscreenImg" src="./img/icon/fullscreen-enter.svg" alt="Fullscreen Button">
         </button>
 
         <button class="smallScreenBtn" id="smallScreenBtn" onclick="closeFullscreen()">
-            <img id="smallScreenImg" class="smallScreenBtnImg" src="./img/icon/fullscreen-inward-true.svg" alt="Fullscreen Button">
+            <img id="smallScreenImg" class="smallScreenBtnImg" src="./img/icon/fullscreen-inward-true.svg"
+                alt="Fullscreen Button">
         </button>
 
-        <div class="guideMainContainer">
+        <div id="guideMainContainer" class="guideMainContainer">
             <div class="guideSingleContainers">
                 <div class="upperGuidContainer">
                     <p>A</p>
@@ -90,9 +91,28 @@
                 </div>
             </div>
         </div>
-    </div>
 
+        <div id="mobileControls" class="mobileControls">
+            <div class="leftRightContainer">
+                <button class="mobileBtn" id="leftBtn">
+                    <p class="mobileBtnLeftRightThrow"><</p>
+                </button>
+                <button class="mobileBtn" id="rightBtn">
+                    <p class="mobileBtnLeftRightThrow">></p>
+                </button>
+            </div>
 
+            <div class="jumpThrowContainer">
+                <button class="mobileBtn" id="jumpBtn">
+                    <p class="mobileBtnJump">^</p>
+                </button>
+                <button class="mobileBtn" id="throwBtn">
+                    <p class="mobileBtnLeftRightThrow">=></p>
+                </button>
+
+            </div>
+
+        </div>
 
 </body>
 
