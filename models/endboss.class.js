@@ -72,33 +72,15 @@ class Endboss extends MovableObject {
     }
 
     animate() {
-        setInterval(() => {
-            if (this.x - this.world.character.x > 360) {
-                this.otherDirection = false;
-                this.moveLeft();
-            }
-        }, 1000 / 20);
+        this.isMoveLeft();
 
+        this.isPlayAnimations();
+    }
+
+    isPlayAnimations() {
         setInterval(() => {
-            if (this.isDead()) {
-                this.playAnimation(this.imagesDead);
-                if (!this.deathFallingStarted) {
-                    this.deathFallingStarted = true;
-                    this.startDeathFall();
-                }
-                return;
-            }
-            if (this.isHurt()) {
-                this.playAnimation(this.imagesHurt);
-                if ((this.energy === 80 || this.energy === 60 || this.energy === 40 || this.energy === 20) && !this.attacking) {
-                    setTimeout(() => this.startAttack(), 500);
-                }
-                return;
-            }
-            if (!this.world || !this.world.character) {
-                this.playAnimation(this.imagesWalking);
-                return;
-            }
+            if (this.isDead()) return this.isDeadAnimation();
+            if (this.isHurt()) return this.isHurtAnimation();
             let distance = Math.abs(this.x - this.world.character.x);
             if (distance <= 360) {
                 this.playAnimation(this.imagesAlert);
@@ -106,6 +88,32 @@ class Endboss extends MovableObject {
                 this.playAnimation(this.imagesWalking);
             }
         }, 1000 / 10);
+    }
+
+    isMoveLeft() {
+        setInterval(() => {
+            if (this.x - this.world.character.x > 360) {
+                this.otherDirection = false;
+                this.moveLeft();
+            }
+        }, 1000 / 20);
+    }
+
+    isHurtAnimation() {
+        this.playAnimation(this.imagesHurt);
+        if ((this.energy === 80 || this.energy === 60 || this.energy === 40 || this.energy === 20) && !this.attacking) {
+            setTimeout(() => this.startAttack(), 500);
+        }
+        return;
+    }
+
+    isDeadAnimation() {
+        this.playAnimation(this.imagesDead);
+        if (!this.deathFallingStarted) {
+            this.deathFallingStarted = true;
+            this.startDeathFall();
+        }
+        return;
     }
 
     startDeathFall() {

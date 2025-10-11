@@ -68,19 +68,17 @@ function hideFullscreenBtnAddSmallscreenBtn() {
 };
 
 
-const mediaQuery = window.matchMedia("(orientation: landscape)");
-// Listen for changes
+let mediaQuery = window.matchMedia("(orientation: landscape)");
+
 mediaQuery.addEventListener("change", handleOrientationChange);
 
 function handleOrientationChange(e) {
     if (e.matches) {
         console.log("Device is in landscape mode (on its side)");
         hideOverlayOnMobile();
-        // Perform actions specific to landscape mode
     } else {
         console.log("Device is in portrait mode");
         showOverlayOnMobile();
-        // Perform actions specific to portrait mode
     }
 }
 
@@ -88,13 +86,9 @@ function handleOrientationChange(e) {
     window.addEventListener(event, checkIfMobile)
 );
 
-
-
-
 function checkIfMobile() {
     let isMobileWidth = window.innerWidth <= 932;
     //let isMobileHeight = window.innerHeight <= 480;
-
     if (isMobileWidth /* && isMobileHeight */) {
         showMobileControls();
         showOverlayOnMobile();
@@ -105,11 +99,6 @@ function checkIfMobile() {
         showElements();
     }
 };
-
-
-
-
-
 
 
 function showMobileControls() {
@@ -130,12 +119,6 @@ function hideElements() {
     let h1Element = document.querySelector('h1');
     if (h1Element) h1Element.style.display = 'none';
 }
-
-
-
-
-
-
 
 
 function hideMobileControls() {

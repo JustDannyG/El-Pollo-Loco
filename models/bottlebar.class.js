@@ -1,4 +1,5 @@
 class Bottlebar extends DrawableObject {
+    
     x = 10;
     y = 100;
     width = 200;
@@ -28,8 +29,7 @@ class Bottlebar extends DrawableObject {
         } else {
             this.percentage = percentage;
         }
-
-        const path = this.bottleImages[this.checkImageIndex()];
+        let path = this.bottleImages[this.checkImageIndex()];
         this.img = this.imageCache[path];
     }
 

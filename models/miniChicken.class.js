@@ -1,5 +1,5 @@
 class MiniChicken extends MovableObject {
-    
+
     y = 334;
     height = 90;
     width = 90;
@@ -27,23 +27,30 @@ class MiniChicken extends MovableObject {
         this.loadImages(this.imagesDead);
         this.animate();
         this.x = 500 + Math.random() * 3600;
-        this.speed = 0.4 + Math.random() * 0.3;
+        this.speed = 1.4 + Math.random() * 0.5;
     }
 
     animate() {
+        this.isMovingLeft();
+        this.isDeadAnimation();
+    };
+
+    isDeadAnimation() {
         setInterval(() => {
-            if (!this.isDead()) {
-                this.moveLeft();
-            }
-        }, 1000 / 60);
-        setInterval(() => {
-            if (this.isDead()) { 
+            if (this.isDead()) {
                 this.img = this.imageCache[this.imagesDead[0]];
                 this.y = 380;
                 this.speed = 0;
-            } else {
-                this.playAnimation(this.imagesWalking);
             }
         }, 1000 / 10);
-    }; 
+    }
+
+    isMovingLeft() {
+        setInterval(() => {
+            if (!this.isDead()) {
+                this.moveLeft();
+                this.playAnimation(this.imagesWalking);
+            }
+        }, 1000 / 12);
+    }
 }

@@ -27,23 +27,26 @@ class Chicken extends MovableObject {
         this.loadImages(this.imagesDead);
         this.animate();
         this.x = 500 + Math.random() * 3600;
-        this.speed = 0.25 + Math.random() * 0.25;
+        this.speed = 1.4 + Math.random() * 0.5;
     }
 
     animate() {
-        setInterval(() => {
-            if (!this.isDead()) {
-                this.moveLeft();
-            }
-        }, 1000 / 60);
+        this.isMovingLeft();
         setInterval(() => {
             if (this.isDead()) { 
                 this.img = this.imageCache[this.imagesDead[0]];
                 this.y = 355;
                 this.speed = 0;
-            } else {
-                this.playAnimation(this.imagesWalking);
             }
         }, 1000 / 10);
     };
+
+    isMovingLeft() {
+        setInterval(() => {
+            if (!this.isDead()) {
+                this.moveLeft();
+                this.playAnimation(this.imagesWalking);
+            }
+        }, 1000 / 12);
+    }
 };

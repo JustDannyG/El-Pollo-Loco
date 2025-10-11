@@ -65,18 +65,28 @@ class ThrowableObject extends MovableObject {
         this.isSplashing = true;
         let currentImage = 0;
         let animation = setInterval(() => {
-            if (currentImage < this.throwImagesImpact.length) {
-                this.img = this.imageCache[this.throwImagesImpact[currentImage]];
-                currentImage++;
-            } else {
-                clearInterval(animation);
-                let stopAnimation = [];
-                if (this.world && this.world.throwableObject) {
-                    stopAnimation = this.world.throwableObject;
-                    stopAnimation.splice(stopAnimation.indexOf(this), 1);
-                }
-            }
+            currentImage = this.isBottleImpact(currentImage, animation);
         }, 100);
+    }
+
+    isBottleImpact(currentImage, animation) {
+        if (currentImage < this.throwImagesImpact.length) {
+            this.img = this.imageCache[this.throwImagesImpact[currentImage]];
+            currentImage++;
+        } else {
+            clearInterval(animation);
+            let stopAnimation = [];
+            stopAnimation = this.isAnimationEnd(stopAnimation);
+        }
+        return currentImage;
+    }
+
+    isAnimationEnd(stopAnimation) {
+        if (this.world && this.world.throwableObject) {
+            stopAnimation = this.world.throwableObject;
+            stopAnimation.splice(stopAnimation.indexOf(this), 1);
+        }
+        return stopAnimation;
     }
 
     stopAnimationtOtherDirection() {

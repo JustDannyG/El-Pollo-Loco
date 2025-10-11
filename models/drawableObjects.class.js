@@ -26,15 +26,4 @@ class DrawableObject {
         this.img = this.imageCache[path];
         this.currentImage++;
     };
-
-    /* drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken || this instanceof Endboss || this instanceof Coin || this instanceof Bottle || this instanceof MiniChicken) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'black';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }; */
-
 };
