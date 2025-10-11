@@ -110,7 +110,7 @@ class Character extends MovableObject {
     }
 
     isMoveLeft() {
-        if (this.world.keyboard.left && this.x > 0) {
+        if (this.world.keyboard.left && this.x > -720) {
             this.moveLeft();
             this.otherDirection = true;
         }

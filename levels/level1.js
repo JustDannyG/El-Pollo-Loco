@@ -66,7 +66,14 @@ function initLevel() {
             new BackgroundObject('./img/5_background/layers/1_first_layer/2.png', 720 * 7)
         ],
         [
-            new Cloud()
+            new Cloud(-720 * 2),
+            new Cloud(-720),
+            new Cloud(0),
+            new Cloud(720),
+            new Cloud(720 * 2),
+            new Cloud(720 * 3),
+            new Cloud(720 * 4),
+            new Cloud(720 * 5)
         ],
         [
             new Coin(),
