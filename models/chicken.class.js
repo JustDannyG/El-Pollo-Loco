@@ -14,6 +14,13 @@ class Chicken extends MovableObject {
         './img/3_enemies_chicken/chicken_normal/2_dead/dead.png'
     ];
 
+    /**
+     * Creates an instance of the Chicken class.
+     * Initializes the chicken's collision offset, loads walking and dead images,
+     * starts the animation, and sets a random starting position and speed.
+     *
+     * @constructor
+     */
     constructor() {
         super();
         this.offset = {
@@ -30,6 +37,11 @@ class Chicken extends MovableObject {
         this.speed = 1.4 + Math.random() * 0.5;
     }
 
+    /**
+     * Starts the animation loop for the chicken character.
+     * Continuously checks if the chicken is dead and updates its image, position, and speed accordingly.
+     * The check runs 10 times per second.
+     */
     animate() {
         this.isMovingLeft();
         setInterval(() => {
@@ -41,6 +53,10 @@ class Chicken extends MovableObject {
         }, 1000 / 10);
     };
 
+    /**
+     * Starts an interval that moves the chicken to the left and plays the walking animation,
+     * as long as the chicken is not dead. The movement and animation are updated 12 times per second.
+     */
     isMovingLeft() {
         setInterval(() => {
             if (!this.isDead()) {

@@ -14,6 +14,11 @@ class MiniChicken extends MovableObject {
         './img/3_enemies_chicken/chicken_small/2_dead/dead.png'
     ];
 
+    /**
+     * Constructs a new MiniChicken instance.
+     * Initializes the offset for collision detection, loads walking and dead images,
+     * starts the animation, sets a random horizontal position, and assigns a random speed.
+     */
     constructor() {
         super();
         this.offset = {
@@ -30,11 +35,21 @@ class MiniChicken extends MovableObject {
         this.speed = 1.4 + Math.random() * 0.5;
     }
 
+    /**
+     * Triggers the animation sequence for the mini chicken.
+     * Calls methods to handle left movement and death animation states.
+     */
     animate() {
         this.isMovingLeft();
         this.isDeadAnimation();
     };
 
+    /**
+     * Starts an interval that checks if the mini chicken is dead.
+     * If dead, updates the image to the dead state, sets the y position to 380,
+     * and stops its movement by setting speed to 0.
+     * The check runs 10 times per second.
+     */
     isDeadAnimation() {
         setInterval(() => {
             if (this.isDead()) {
@@ -45,6 +60,10 @@ class MiniChicken extends MovableObject {
         }, 1000 / 10);
     }
 
+    /**
+     * Starts an interval that moves the mini chicken to the left and plays the walking animation,
+     * as long as the mini chicken is not dead. The movement and animation are updated at a rate of 12 times per second.
+     */
     isMovingLeft() {
         setInterval(() => {
             if (!this.isDead()) {

@@ -17,6 +17,14 @@ class ThrowableObject extends MovableObject {
         './img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png'
     ];
 
+    /**
+     * Creates an instance of the throwable object at the specified coordinates.
+     * Initializes the object's offset, position, and loads the necessary images.
+     * Also triggers the throw action with initial velocities.
+     *
+     * @param {number} x - The x-coordinate for the object's initial position.
+     * @param {number} y - The y-coordinate for the object's initial position.
+     */
     constructor(x, y) {
         super();
         this.offset = {
@@ -33,12 +41,21 @@ class ThrowableObject extends MovableObject {
         this.throw(100, 150);
     };
 
+    /**
+     * Initiates the throw action for the object.
+     * Sets the vertical speed, applies gravity, and starts the throw animation.
+     */
     throw() {
         this.speedY = 30;
         this.applyGravity();
         this.animate();
     }
 
+    /**
+     * Starts the animation for the throwable object by repeatedly calling
+     * the methods to throw the bottle to the right and left at a fixed interval.
+     * The animation runs every 25 milliseconds and stores the interval ID in `flyInterval`.
+     */
     animate() {
         this.flyInterval = setInterval(() => {
             this.throwBottleRight();
@@ -46,6 +63,10 @@ class ThrowableObject extends MovableObject {
         }, 25);
     }
 
+    /**
+     * Throws the bottle to the right if it is not currently splashing and the object is facing right.
+     * Increases the x position and plays the throw animation.
+     */
     throwBottleRight() {
         if (!this.isSplashing && this.otherDirection == false) {
             this.x += 10;
@@ -53,6 +74,13 @@ class ThrowableObject extends MovableObject {
         }
     }
 
+    /**
+     * Throws the bottle to the left if the character is facing the opposite direction.
+     * Decreases the x position by 10 units and plays the throw animation.
+     *
+     * @function
+     * @returns {void}
+     */
     throwBottleLeft() {
         if (this.otherDirection == true) {
             this.x -= 10;
@@ -60,6 +88,13 @@ class ThrowableObject extends MovableObject {
         }
     }
 
+    /**
+     * Handles the logic when the throwable object impacts the ground.
+     * Stops the animation in the other direction, sets the object to splashing state,
+     * and starts the splash animation sequence.
+     *
+     * @returns {void}
+     */
     onGroundImpact() {
         this.stopAnimationtOtherDirection();
         this.isSplashing = true;
@@ -69,6 +104,14 @@ class ThrowableObject extends MovableObject {
         }, 100);
     }
 
+    /**
+     * Handles the bottle impact animation by updating the current image frame.
+     * If the animation reaches the end, it clears the interval and triggers the end-of-animation logic.
+     *
+     * @param {number} currentImage - The current frame index of the impact animation.
+     * @param {number} animation - The interval ID for the animation, used to clear the interval when done.
+     * @returns {number} The updated frame index after processing the current step.
+     */
     isBottleImpact(currentImage, animation) {
         if (currentImage < this.throwImagesImpact.length) {
             this.img = this.imageCache[this.throwImagesImpact[currentImage]];
@@ -81,6 +124,13 @@ class ThrowableObject extends MovableObject {
         return currentImage;
     }
 
+    /**
+     * Checks if the animation has ended for this throwable object.
+     * If the object exists in the world's throwableObject array, it removes it from the array.
+     *
+     * @param {Array} stopAnimation - The array of throwable objects to potentially update.
+     * @returns {Array} The updated array of throwable objects after removal.
+     */
     isAnimationEnd(stopAnimation) {
         if (this.world && this.world.throwableObject) {
             stopAnimation = this.world.throwableObject;
@@ -89,6 +139,10 @@ class ThrowableObject extends MovableObject {
         return stopAnimation;
     }
 
+    /**
+     * Stops the animation for the throwable object when moving in the other direction.
+     * Clears the interval responsible for the flying animation if it exists.
+     */
     stopAnimationtOtherDirection() {
         if (this.flyInterval) {
             clearInterval(this.flyInterval);

@@ -66,6 +66,11 @@ class Character extends MovableObject {
         './img/2_character_pepe/5_dead/D-57.png'
     ];
 
+    /**
+     * Initializes a new instance of the Character class.
+     * Sets up the offset for collision detection, initializes the death falling state,
+     * loads all character images, applies gravity, and starts the animation loop.
+     */
     constructor() {
         super();
         this.offset = {
@@ -80,6 +85,11 @@ class Character extends MovableObject {
         this.animate();
     };
 
+    /**
+     * Loads all character animation images into memory.
+     * This includes idle, long idle, walking, jumping, hurt, and dead animation frames.
+     * Ensures that all necessary images are preloaded for smooth character animation.
+     */
     loadAllImages() {
         this.loadImage(this.imagesIdle[0]);
         this.loadImages(this.imagesIdle);
@@ -90,11 +100,26 @@ class Character extends MovableObject {
         this.loadImages(this.imagesDead);
     };
 
+    /**
+     * Triggers the character's animation sequence.
+     * Calls internal methods to determine the reason for animation and to start the animation process.
+     */
     animate() {
         this.reasonForAnimation();
         this.startAnimation();
     };
 
+    /**
+     * Continuously updates the character's animation state and camera position.
+     * 
+     * This method sets up a recurring interval (60 times per second) to:
+     * - Check and update if the character is moving right.
+     * - Check and update if the character is moving left.
+     * - Check and update if the character is jumping.
+     * - Adjust the world's camera position based on the character's current x-coordinate.
+     *
+     * @returns {void}
+     */
     reasonForAnimation() {
         setInterval(() => {
             this.isMoveRight();
@@ -104,12 +129,24 @@ class Character extends MovableObject {
         }, 1000 / 60);
     }
 
+    /**
+     * Checks if the jump key is pressed and the character is on the ground.
+     * If both conditions are met, initiates the jump action.
+     *
+     * @returns {void}
+     */
     isJumping() {
         if (this.world.keyboard.jump && !this.isAboveGround()) {
             this.jump();
         }
     }
 
+    /**
+     * Checks if the left movement key is pressed and the character's x position is greater than -720.
+     * If so, moves the character to the left and sets the direction flag.
+     *
+     * @returns {void}
+     */
     isMoveLeft() {
         if (this.world.keyboard.left && this.x > -720) {
             this.moveLeft();
@@ -117,6 +154,10 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Checks if the right movement key is pressed and the character has not reached the level's end.
+     * If so, moves the character to the right and sets the direction flag accordingly.
+     */
     isMoveRight() {
         if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
             this.moveRight();
@@ -124,6 +165,16 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Starts the character's animation loop, updating the animation state every 100ms.
+     * The animation played depends on the character's current state:
+     * - Plays dead animation if the character is dead.
+     * - Plays hurt animation if the character is hurt.
+     * - Plays jumping animation if the character is above ground.
+     * - Plays walking animation if the character is moving left or right.
+     * - Plays idle animations otherwise.
+     * Resets idle tick counter when the character is not idle.
+     */
     startAnimation() {
         setInterval(() => {
             if (this.isDead()) {
@@ -143,6 +194,13 @@ class Character extends MovableObject {
         }, 1000 / 10);
     }
 
+    /**
+     * Plays the appropriate idle animation based on the number of idle ticks.
+     * If the idleTicks counter exceeds or equals the idleThreshold, plays the long idle animation.
+     * Otherwise, plays the regular idle animation.
+     *
+     * @method
+     */
     playIdleAnimations() {
         this.idleTicks++;
         if (this.idleTicks >= this.idleThreshold) {
@@ -152,6 +210,12 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Triggers the dead animation sequence for the character.
+     * Resets idle ticks, plays the dead animation, and initiates the death fall if it hasn't started yet.
+     *
+     * @returns {void}
+     */
     playDeadAnimation() {
         this.idleTicks = 0;
         this.playAnimation(this.imagesDead);
@@ -161,6 +225,11 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Initiates the character's death fall animation by continuously increasing the `y` position.
+     * The position is updated every frame (approximately 60 times per second).
+     * This simulates the character falling down after death.
+     */
     startDeathFall() {
         setInterval(() => {
             this.y += 5;

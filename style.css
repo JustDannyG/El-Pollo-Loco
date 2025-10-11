@@ -138,7 +138,6 @@ p {
   padding: 0 32px 0 32px;
 }
 
-/* Overlay styles */
 .overlay {
   position: fixed;
   top: 0;
@@ -178,7 +177,7 @@ p {
   z-index: 20;
 }
 
-.impressum {
+.impressumLink {
   color: white;
   text-decoration: none;
   font-size: 14px;

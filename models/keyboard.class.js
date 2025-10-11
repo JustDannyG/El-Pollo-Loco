@@ -4,6 +4,11 @@ class Keyboard {
     jump = false;
     throw = false;
 
+    /**
+     * Initializes the keyboard event listeners.
+     * - Adds general keyboard listeners.
+     * - Ensures key press events are added after the DOM is fully loaded.
+     */
     constructor() {
         this.addKeyboardListeners();
         if (document.readyState === 'loading') {
@@ -13,6 +18,18 @@ class Keyboard {
         }
     }
 
+    /**
+     * Adds event listeners for keyboard input to control game actions.
+     * 
+     * Listens for "keydown" and "keyup" events on the window object and updates the
+     * corresponding properties on the `keyboard` object:
+     * - A (keyCode 65): Move left
+     * - D (keyCode 68): Move right
+     * - Space (keyCode 32): Jump
+     * - W (keyCode 87): Throw
+     *
+     * @method
+     */
     addKeyboardListeners() {
         window.addEventListener("keydown", (event) => {
             if (event.keyCode == 65) {
@@ -45,6 +62,15 @@ class Keyboard {
         });
     };
 
+    /**
+     * Adds touch event listeners to control buttons for mobile input.
+     * 
+     * Binds 'touchstart' and 'touchend' events to the left, right, jump, and throw buttons,
+     * updating the corresponding properties (`left`, `right`, `jump`, `throw`) on the class instance.
+     * Prevents default touch behavior to ensure smooth game controls.
+     *
+     * @returns {void}
+     */
     addKeyPressEvents() {
         document.getElementById('leftBtn').addEventListener('touchstart', (e) => {
             e.preventDefault();
