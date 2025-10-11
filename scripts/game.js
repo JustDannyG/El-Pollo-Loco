@@ -74,10 +74,8 @@ mediaQuery.addEventListener("change", handleOrientationChange);
 
 function handleOrientationChange(e) {
     if (e.matches) {
-        console.log("Device is in landscape mode (on its side)");
         hideOverlayOnMobile();
     } else {
-        console.log("Device is in portrait mode");
         showOverlayOnMobile();
     }
 }

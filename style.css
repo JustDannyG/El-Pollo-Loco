@@ -85,7 +85,7 @@ p {
 
 .fullscreenBtn {
   position: absolute;
-  bottom: 112px;
+  bottom: 134px;
   right: 10px;
   background: none;
   border: none;
@@ -176,6 +176,17 @@ p {
   display: flex;
   gap: 36px;
   z-index: 20;
+}
+
+.impressum {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Comic Sans MS';
 }
 
 @media only screen and (max-width: 932px) {

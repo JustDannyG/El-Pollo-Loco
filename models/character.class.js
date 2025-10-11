@@ -6,7 +6,7 @@ class Character extends MovableObject {
     world;
     energy = 100;
     idleTicks = 0;
-    idleThreshold = 40;
+    idleThreshold = 50;
 
     imagesIdle = [
         './img/2_character_pepe/1_idle/idle/I-1.png',
