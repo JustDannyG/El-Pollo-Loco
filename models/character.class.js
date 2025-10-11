@@ -96,30 +96,37 @@ class Character extends MovableObject {
 
     reasonForAnimation() {
         setInterval(() => {
-            if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                this.otherDirection = false;
-            }
-            if (this.world.keyboard.left && this.x > 0) {
-                this.moveLeft();
-                this.otherDirection = true;
-            }
-            if (this.world.keyboard.jump && !this.isAboveGround()) {
-                this.jump();
-            }
+            this.isMoveRight();
+            this.isMoveLeft();
+            this.isJumping();
             this.world.camera_x = -this.x + 120;
         }, 1000 / 60);
+    }
+
+    isJumping() {
+        if (this.world.keyboard.jump && !this.isAboveGround()) {
+            this.jump();
+        }
+    }
+
+    isMoveLeft() {
+        if (this.world.keyboard.left && this.x > 0) {
+            this.moveLeft();
+            this.otherDirection = true;
+        }
+    }
+
+    isMoveRight() {
+        if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
+            this.moveRight();
+            this.otherDirection = false;
+        }
     }
 
     startAnimation() {
         setInterval(() => {
             if (this.isDead()) {
-                this.idleTicks = 0;
-                this.playAnimation(this.imagesDead);
-                if (!this.deathFallingStarted) {
-                    this.deathFallingStarted = true;
-                    this.startDeathFall();
-                }
+                this.playDeadAnimation();
             } else if (this.isHurt()) {
                 this.idleTicks = 0;
                 this.playAnimation(this.imagesHurt);
@@ -130,14 +137,27 @@ class Character extends MovableObject {
                 this.idleTicks = 0;
                 this.playAnimation(this.imagesWalking);
             } else {
-                this.idleTicks++;
-                if (this.idleTicks >= this.idleThreshold) {
-                    this.playAnimation(this.imagesIdleLong);
-                } else {
-                    this.playAnimation(this.imagesIdle);
-                }
+                this.playIdleAnimations();
             }
         }, 1000 / 10);
+    }
+
+    playIdleAnimations() {
+        this.idleTicks++;
+        if (this.idleTicks >= this.idleThreshold) {
+            this.playAnimation(this.imagesIdleLong);
+        } else {
+            this.playAnimation(this.imagesIdle);
+        }
+    }
+
+    playDeadAnimation() {
+        this.idleTicks = 0;
+        this.playAnimation(this.imagesDead);
+        if (!this.deathFallingStarted) {
+            this.deathFallingStarted = true;
+            this.startDeathFall();
+        }
     }
 
     startDeathFall() {

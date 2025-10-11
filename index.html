@@ -114,7 +114,7 @@
 
         </div>
 
-        <div id="overlay" class="overlay hidden" onclick="hideOverlayOnMobile()">
+        <div id="overlay" class="overlay hidden" onclick="if (event.target === this) hideOverlayOnMobile()">
             <div class="overlayContent">
                 <p>Turn your Device to play</p>
             </div>

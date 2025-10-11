@@ -73,22 +73,28 @@ class World {
     checkCollisions() {
         this.level.enemies.forEach(enemy => {
             if (this.character.isColiding(enemy)) {
-                if (enemy.energy === 0) {
-                    return;
-                }
-                if (this.character.speedY < 0 && (this.character.y + this.character.height - 100) <= enemy.y) {
+                if (enemy.energy === 0) return;
+                if (this.checkCharacterY(enemy)) {
                     enemy.energy = 0;
                 } else {
-                    if (enemy instanceof Endboss) {
-                        this.character.hitByEndboss();
-                    } else {
-                        this.character.hit();
-                    }
+                    this.checkWhichEnemyIsHitting(enemy);
                     this.statusbar.setPercentage(this.character.energy);
                 }
             }
         });
     };
+
+    checkCharacterY(enemy) {
+        return this.character.speedY < 0 && (this.character.y + this.character.height - 100) < enemy.y;
+    }
+
+    checkWhichEnemyIsHitting(enemy) {
+        if (enemy instanceof Endboss) {
+            this.character.hitByEndboss();
+        } else {
+            this.character.hit();
+        }
+    }
 
     checkBottleHitsEndboss() {
         this.throwableObject.forEach((bottle) => {
@@ -133,6 +139,22 @@ class World {
     addObjectsToMap() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
+        this.renderObjects();
+        this.ctx.translate(-this.camera_x, 0);
+        this.renderBars();
+        this.checkGameEnd();
+        let self = this;
+        requestAnimationFrame(() => { self.draw(); });
+    };
+
+    renderBars() {
+        this.addToMap(this.statusbarEndboss);
+        this.addToMap(this.statusbar);
+        this.addToMap(this.coinbar);
+        this.addToMap(this.bottlebar);
+    }
+
+    renderObjects() {
         this.addObjectToMap(this.level.backgroundObjects);
         this.addObjectToMap(this.level.clouds);
         this.addObjectToMap(this.level.enemies);
@@ -140,15 +162,7 @@ class World {
         this.addObjectToMap(this.level.bottles);
         this.addObjectToMap(this.throwableObject);
         this.addToMap(this.character);
-        this.ctx.translate(-this.camera_x, 0);
-        this.addToMap(this.statusbarEndboss);
-        this.addToMap(this.statusbar);
-        this.addToMap(this.coinbar);
-        this.addToMap(this.bottlebar);
-        this.checkGameEnd();
-        let self = this;
-        requestAnimationFrame(() => { self.draw(); });
-    };
+    }
 
     checkGameEnd() {
         this.showYouWonScreen();

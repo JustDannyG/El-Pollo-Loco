@@ -178,7 +178,7 @@ p {
   z-index: 20;
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 932px) {
   canvas {
     width: calc(100vw - 1px);
     max-width: 100%;

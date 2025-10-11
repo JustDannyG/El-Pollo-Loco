@@ -7,41 +7,12 @@ let fullscreen = false;
 function init() {
     canvas = document.getElementById('canvas');
     checkIfMobile();
+    handleOrientationChange(mediaQuery);
     if (world && world.stop) {
         world.stop();
     }
     world = new World(canvas, keyboard);
 };
-
-window.addEventListener("keydown", (event) => {
-    if (event.keyCode == 65) {
-        keyboard.left = true;
-    }
-    if (event.keyCode == 68) {
-        keyboard.right = true;
-    }
-    if (event.keyCode == 32) {
-        keyboard.jump = true;
-    }
-    if (event.keyCode == 87) {
-        keyboard.throw = true;
-    }
-});
-
-window.addEventListener("keyup", (event) => {
-    if (event.keyCode == 65) {
-        keyboard.left = false;
-    }
-    if (event.keyCode == 68) {
-        keyboard.right = false;
-    }
-    if (event.keyCode == 32) {
-        keyboard.jump = false;
-    }
-    if (event.keyCode == 87) {
-        keyboard.throw = false;
-    }
-});
 
 function openFullscreen() {
     addFullscreenStyle();
@@ -96,40 +67,54 @@ function hideFullscreenBtnAddSmallscreenBtn() {
     if (smallBtn) smallBtn.style.display = 'none';
 };
 
-window.addEventListener('resize', () => {
-    checkIfMobile();
-});
+
+const mediaQuery = window.matchMedia("(orientation: landscape)");
+// Listen for changes
+mediaQuery.addEventListener("change", handleOrientationChange);
+
+function handleOrientationChange(e) {
+    if (e.matches) {
+        console.log("Device is in landscape mode (on its side)");
+        hideOverlayOnMobile();
+        // Perform actions specific to landscape mode
+    } else {
+        console.log("Device is in portrait mode");
+        showOverlayOnMobile();
+        // Perform actions specific to portrait mode
+    }
+}
+
+['resize', 'orientationchange'].forEach(event =>
+    window.addEventListener(event, checkIfMobile)
+);
+
+
+
 
 function checkIfMobile() {
-    if (window.innerWidth <= 720) {
+    let isMobileWidth = window.innerWidth <= 932;
+    //let isMobileHeight = window.innerHeight <= 480;
+
+    if (isMobileWidth /* && isMobileHeight */) {
         showMobileControls();
         showOverlayOnMobile();
+        hideElements();
     } else {
         hideMobileControls();
         hideOverlayOnMobile();
+        showElements();
     }
 };
+
+
+
+
+
+
 
 function showMobileControls() {
     let mobileControls = document.getElementById('mobileControls');
     if (mobileControls) mobileControls.style.display = 'flex';
-    let guideMainContainer = document.getElementById('guideMainContainer');
-    if (guideMainContainer) guideMainContainer.style.display = 'none';
-    let howToStartGame = document.getElementById('howToStartGame');
-    if (howToStartGame) howToStartGame.style.display = 'none';
-    let h1Element = document.querySelector('h1');
-    if (h1Element) h1Element.style.display = 'none';
-};
-
-function hideMobileControls() {
-    let mobileControls = document.getElementById('mobileControls');
-    if (mobileControls) mobileControls.style.display = 'none';
-    let guideMainContainer = document.getElementById('guideMainContainer');
-    if (guideMainContainer) guideMainContainer.style.display = 'flex';
-    let howToStartGame = document.getElementById('howToStartGame');
-    if (howToStartGame) howToStartGame.style.display = 'block';
-    let h1Element = document.querySelector('h1');
-    if (h1Element) h1Element.style.display = 'block';
 };
 
 function showOverlayOnMobile() {
@@ -137,7 +122,37 @@ function showOverlayOnMobile() {
     if (overlay) overlay.style.display = 'block';
 };
 
+function hideElements() {
+    let guideMainContainer = document.getElementById('guideMainContainer');
+    if (guideMainContainer) guideMainContainer.style.display = 'none';
+    let howToStartGame = document.getElementById('howToStartGame');
+    if (howToStartGame) howToStartGame.style.display = 'none';
+    let h1Element = document.querySelector('h1');
+    if (h1Element) h1Element.style.display = 'none';
+}
+
+
+
+
+
+
+
+
+function hideMobileControls() {
+    let mobileControls = document.getElementById('mobileControls');
+    if (mobileControls) mobileControls.style.display = 'none';
+};
+
 function hideOverlayOnMobile() {
     let overlay = document.getElementById('overlay');
     if (overlay) overlay.style.display = 'none';
 };
+
+function showElements() {
+    let guideMainContainer = document.getElementById('guideMainContainer');
+    if (guideMainContainer) guideMainContainer.style.display = 'flex';
+    let howToStartGame = document.getElementById('howToStartGame');
+    if (howToStartGame) howToStartGame.style.display = 'block';
+    let h1Element = document.querySelector('h1');
+    if (h1Element) h1Element.style.display = 'block';
+}
