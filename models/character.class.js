@@ -4,7 +4,7 @@ class Character extends MovableObject {
     width = 160;
     speed = 10;
     world;
-    energy = 100;
+    energy = 1000;
     idleTicks = 0;
     idleThreshold = 50;
 
@@ -75,8 +75,8 @@ class Character extends MovableObject {
         super();
         this.offset = {
             top: 140,
-            left: 25,
-            right: 25,
+            left: 45,
+            right: 45,
             bottom: 10
         };
         this.deathFallingStarted = false;

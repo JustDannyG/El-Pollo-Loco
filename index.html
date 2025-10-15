@@ -95,7 +95,8 @@
         <div id="mobileControls" class="mobileControls">
             <div class="leftRightContainer">
                 <button class="mobileBtn" id="leftBtn">
-                    <p class="mobileBtnLeftRightThrow"> < </p>
+                    <p class="mobileBtnLeftRightThrow">
+                        < </p>
                 </button>
                 <button class="mobileBtn" id="rightBtn">
                     <p class="mobileBtnLeftRightThrow"> > </p>
@@ -120,10 +121,33 @@
             </div>
         </div>
 
-        <div>
-            <a id="impressum" class="impressumLink" href="impressum.html" target="_blank">Impressum</a>
+        <div id="impressumModal" class="impressumModal hidden" role="dialog" aria-modal="true"
+            aria-labelledby="impressumTitle">
+            <div class="modal-content">
+                <button class="close-btn" aria-label="Schließen" onclick="closeImpressum()">✕</button>
+                <h2 id="impressumTitle">Impressum</h2>
+                <p class="legal__address impressumText">
+                    Danny Gruchmann <br>
+                    Pleißenweg 7 <br>
+                    04600 Altenburg <br>
+                    Deutschland
+                </p>
+
+                <h2 class="legal__subtitle">Kontakt</h2>
+                <div class="contactContainer">
+                    <p class="impressumText">E-Mail:</p>
+                    <a class="legal__desc"><a class="legal__link"
+                            href="mailto:danny.grmn@icloud.com">danny.grmn@icloud.com</a>
+                    </a>
+                    <p class="impressumText">Telefon:</p>
+                    <a class="legal__desc"><a class="legal__link" href="tel:+491738482233">+49 173 8482233</a></a>
+                </div>
+            </div>
         </div>
 
+        <footer>
+            <a id="impressum" class="impressumLink" href="#" onclick="openImpressum()">Impressum</a>
+        </footer>
 </body>
 
 </html>

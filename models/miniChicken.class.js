@@ -1,8 +1,8 @@
 class MiniChicken extends MovableObject {
 
-    y = 334;
-    height = 90;
-    width = 90;
+    y = 360;
+    height = 70;
+    width = 70;
 
     imagesWalking = [
         './img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
@@ -22,7 +22,7 @@ class MiniChicken extends MovableObject {
     constructor() {
         super();
         this.offset = {
-            top: 10,
+            top: 0,
             left: 5,
             right: 5,
             bottom: 10

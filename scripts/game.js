@@ -28,7 +28,8 @@ function init() {
  */
 function openFullscreen() {
     addFullscreenStyle();
-    addFullscreenBtnHideSmallscreenBtn();
+    hideFullscreenBtnAddSmallscreenBtn();
+    hideImpressum();
     let el = document.getElementById('fullscreen');
     if (el.requestFullscreen) {
         el.requestFullscreen();
@@ -49,7 +50,8 @@ function openFullscreen() {
  */
 function closeFullscreen() {
     addSmallscreenStyle();
-    hideFullscreenBtnAddSmallscreenBtn();
+    addFullscreenBtnHideSmallscreenBtn();
+    showImpressum();
     if (document.exitFullscreen) {
         document.exitFullscreen();
     } else if (document.webkitExitFullscreen) {
@@ -92,7 +94,7 @@ function addSmallscreenStyle() {
  * If the fullscreen button exists, it will be hidden.
  * If the small screen button exists, it will be shown.
  */
-function addFullscreenBtnHideSmallscreenBtn() {
+function hideFullscreenBtnAddSmallscreenBtn() {
     let fsBtn = document.getElementById('fullscreenBtn');
     let smallBtn = document.getElementById('smallScreenBtn');
     if (fsBtn) fsBtn.style.display = 'none';
@@ -105,7 +107,7 @@ function addFullscreenBtnHideSmallscreenBtn() {
  *
  * @function
  */
-function hideFullscreenBtnAddSmallscreenBtn() {
+function addFullscreenBtnHideSmallscreenBtn() {
     let fsBtn = document.getElementById('fullscreenBtn');
     let smallBtn = document.getElementById('smallScreenBtn');
     if (fsBtn) fsBtn.style.display = 'block';
@@ -134,21 +136,35 @@ function handleOrientationChange(e) {
     window.addEventListener(event, checkIfMobile)
 );
 
+
 /**
- * Checks if the current window width indicates a mobile device.
- * If on mobile, displays mobile controls and overlays, and hides certain elements.
- * If not on mobile, hides mobile controls and overlays, and shows those elements.
+ * Checks if the current device is mobile based on the window width and manages UI elements accordingly.
+ * - Shows or hides mobile controls, overlays, and other elements depending on device type and fullscreen state.
+ * - Hides the impressum on mobile or when in fullscreen mode on desktop.
+ * - Shows the impressum only on desktop when not in fullscreen mode.
  */
 function checkIfMobile() {
-    let isMobileWidth = window.innerWidth <= 932;
+    let isMobileWidth = window.innerWidth <= 1024;
+    let isFullscreenActive = () =>
+        fullscreen
+        || document.fullscreenElement
+        || document.webkitFullscreenElement
+        || document.mozFullScreenElement
+        || document.msFullscreenElement;
     if (isMobileWidth) {
         showMobileControls();
         showOverlayOnMobile();
         hideElements();
+        hideImpressum();
     } else {
         hideMobileControls();
         hideOverlayOnMobile();
         showElements();
+        if (!isFullscreenActive()) {
+            showImpressum();
+        } else {
+            hideImpressum();
+        }
     }
 };
 
@@ -182,6 +198,14 @@ function hideElements() {
     if (howToStartGame) howToStartGame.style.display = 'none';
     let h1Element = document.querySelector('h1');
     if (h1Element) h1Element.style.display = 'none';
+    let fullscreenImg = document.getElementById('fullscreenImg');
+    if (fullscreenImg) fullscreenImg.style.display = 'none';
+    hideImpressum();
+}
+
+function hideImpressum() {
+    let impressum = document.getElementById('impressum');
+    if (impressum) impressum.style.display = 'none';
 }
 
 
@@ -212,10 +236,36 @@ function hideOverlayOnMobile() {
  * Elements are selected by their IDs or tag name. If an element is not found, it is skipped.
  */
 function showElements() {
+    showImpressum();
     let guideMainContainer = document.getElementById('guideMainContainer');
     if (guideMainContainer) guideMainContainer.style.display = 'flex';
     let howToStartGame = document.getElementById('howToStartGame');
     if (howToStartGame) howToStartGame.style.display = 'block';
     let h1Element = document.querySelector('h1');
     if (h1Element) h1Element.style.display = 'block';
+    let fullscreenImg = document.getElementById('fullscreenImg');
+    if (fullscreenImg) fullscreenImg.style.display = 'flex';
 }
+
+function showImpressum() {
+    let impressum = document.getElementById('impressum');
+    if (impressum) impressum.style.display = 'flex';
+}
+
+/**
+ * Displays the Impressum modal by removing the 'hidden' class from the modal element.
+ * Assumes there is an element with the ID 'impressumModal' in the DOM.
+ */
+function openImpressum() {
+    let modal = document.getElementById('impressumModal');
+    if (modal) modal.classList.remove('hidden');
+};
+
+/**
+ * Closes the Impressum modal by adding the 'hidden' class to its element.
+ * Checks if the modal element with the ID 'impressumModal' exists before attempting to hide it.
+ */
+function closeImpressum() {
+    let modal = document.getElementById('impressumModal');
+    if (modal) modal.classList.add('hidden');
+};

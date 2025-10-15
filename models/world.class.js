@@ -130,7 +130,7 @@ class World {
      * @returns {boolean} True if the character is moving upwards and is above the enemy, otherwise false.
      */
     checkCharacterY(enemy) {
-        return this.character.speedY < 0 && (this.character.y + this.character.height - 100) < enemy.y;
+        return this.character.speedY < 0 && (this.character.y + this.character.height - 80) < enemy.y;
     }
 
     /**

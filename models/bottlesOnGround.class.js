@@ -28,8 +28,8 @@ class Bottle extends DrawableObject {
         super();
         this.offset = {
             top: 10,
-            left: 15,
-            right: 15,
+            left: 25,
+            right: 25,
             bottom: 10
         };
         this.loadImage(this.bottleImages);

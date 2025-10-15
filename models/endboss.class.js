@@ -58,8 +58,8 @@ class Endboss extends MovableObject {
         super();
         this.offset = {
             top: 40,
-            left: 30,
-            right: 30,
+            left: 20,
+            right: 20,
             bottom: 20
         };
         this.deathFallingStarted = false;
