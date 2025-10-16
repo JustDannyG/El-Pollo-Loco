@@ -8,32 +8,9 @@ class AudioManager {
     deadAudioStatusCharacter = false;
     mainMusicAudioStatus = false;
 
-    splashAudio;
-    hurtAudioEndboss;
-    deadAudioEndboss;
-    hurtAudioCharacter;
-    jumpAudioCharacter;
-    deadAudioCharacter;
-
     constructor() {
         this.mainAudio = new Audio('./audio/265615__zagi2__loca-salsa-2.wav');
         this.mainAudio.loop = true;
-        this.loadAudios();
-    }
-
-    loadAudios() {
-        this.splashAudio = new Audio('./audio/213158__arnaud-coutancier__broken-bottle-verre-07.wav');
-        this.splashAudio.load();
-        this.hurtAudioEndboss = new Audio('./audio/endboss-chicken-attack.wav');
-        this.hurtAudioEndboss.load();
-        this.deadAudioEndboss = new Audio('./audio/enboss-chicken-dead.wav');
-        this.deadAudioEndboss.load();
-        this.hurtAudioCharacter = new Audio('./audio/795690__randbsoundbites__death-cry (1).wav');
-        this.hurtAudioCharacter.load();
-        this.jumpAudioCharacter = new Audio('./audio/345437__artmasterrich__male_jump_01.wav');
-        this.jumpAudioCharacter.load();
-        this.deadAudioCharacter = new Audio('./audio/796567__randbsoundbites__character-death.wav');
-        this.deadAudioCharacter.load();
     }
 
     mute() {

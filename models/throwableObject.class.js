@@ -1,7 +1,7 @@
 class ThrowableObject extends MovableObject {
 
     y = 360;
-    /* splashAudio; */
+    splashAudio;
 
     throwImages = [
         './img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
@@ -39,14 +39,14 @@ class ThrowableObject extends MovableObject {
         this.loadImage(this.throwImages[0]);
         this.loadImages(this.throwImages);
         this.loadImages(this.throwImagesImpact);
-        //this.loadAudios();
+        this.loadAudios();
         this.throw(100, 150);
     };
 
-    /* loadAudios() {
+    loadAudios() {
         this.splashAudio = new Audio('./audio/213158__arnaud-coutancier__broken-bottle-verre-07.wav');
         this.splashAudio.load();
-    } */
+    }
 
     /**
      * Initiates the throw action for the object.

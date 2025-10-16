@@ -7,6 +7,9 @@ class Character extends MovableObject {
     energy = 100;
     idleTicks = 0;
     idleThreshold = 50;
+    hurtAudio;
+    jumpAudio;
+    deadAudio;
 
     imagesIdle = [
         './img/2_character_pepe/1_idle/idle/I-1.png',
@@ -81,9 +84,19 @@ class Character extends MovableObject {
         };
         this.deathFallingStarted = false;
         this.loadAllImages();
+        this.loadAudios();
         this.applyGravity();
         this.animate();
     };
+
+    loadAudios() {
+        this.hurtAudio = new Audio('./audio/795690__randbsoundbites__death-cry (1).wav');
+        this.hurtAudio.load();
+        this.jumpAudio = new Audio('./audio/345437__artmasterrich__male_jump_01.wav');
+        this.jumpAudio.load();
+        this.deadAudio = new Audio('./audio/796567__randbsoundbites__character-death.wav');
+        this.deadAudio.load();
+    }
 
     /**
      * Loads all character animation images into memory.
@@ -198,9 +211,9 @@ class Character extends MovableObject {
 
     playHurtAudio() {
         if (audioManager && audioManager.hurtAudioStatusCharacter == true) {
-            this.hurtAudioCharacter.play();
+            this.hurtAudio.play();
         } else {
-            this.hurtAudioCharacter.pause();
+            this.hurtAudio.pause();
         }
     }
 
@@ -215,9 +228,9 @@ class Character extends MovableObject {
 
     playJumpAudio() {
         if (audioManager && audioManager.jumpAudioStatusCharacter == true) {
-            this.jumpAudioCharacter.play();
+            this.jumpAudio.play();
         } else {
-            this.jumpAudioCharacter.pause();
+            this.jumpAudio.pause();
         }
     }
 
@@ -266,9 +279,9 @@ class Character extends MovableObject {
 
     playDeadAudio() {
         if (audioManager && audioManager.deadAudioStatusCharacter == true) {
-            this.deadAudioCharacter.play();
+            this.deadAudio.play();
         } else {
-            this.deadAudioCharacter.pause();
+            this.deadAudio.pause();
         }
     }
 };

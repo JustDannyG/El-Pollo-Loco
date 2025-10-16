@@ -5,6 +5,8 @@ class Endboss extends MovableObject {
     height = 330;
     width = 300;
     energy = 100;
+    hurtAudio;
+    deadAudio;
 
     imagesWalking = [
         './img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -64,9 +66,17 @@ class Endboss extends MovableObject {
         };
         this.deathFallingStarted = false;
         this.loadAllImages();
+        this.loadAudios();
         this.speed = 10;
         this.applyGravity();
         this.animate();
+    }
+
+    loadAudios() {
+        this.hurtAudio = new Audio('./audio/endboss-chicken-attack.wav');
+        this.hurtAudio.load();
+        this.deadAudio = new Audio('./audio/enboss-chicken-dead.wav');
+        this.deadAudio.load();
     }
 
     /**
@@ -148,9 +158,9 @@ class Endboss extends MovableObject {
 
     playHurtAudio() {
         if (audioManager && audioManager.hurtAudioStatusEndboss == true) {
-            this.hurtAudioEndboss.play();
+            this.hurtAudio.play();
         } else {
-            this.hurtAudioEndboss.pause();
+            this.hurtAudio.pause();
         }
     }
 
@@ -185,9 +195,9 @@ class Endboss extends MovableObject {
 
     playDeadAudio() {
         if (audioManager && audioManager.deadAudioStatusEndboss == true) {
-            this.deadAudioEndboss.play();
+            this.deadAudio.play();
         } else {
-            this.deadAudioEndboss.pause();
+            this.deadAudio.pause();
         }
     }
 
