@@ -2,7 +2,6 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let fullscreen = false;
-let audio = new Audio('./audio/265615__zagi2__loca-salsa-2.wav');
 
 /**
  * Initializes the game by setting up the canvas, checking for mobile devices,
@@ -20,31 +19,6 @@ function init() {
     }
     world = new World(canvas, keyboard);
 };
-
-function mute() {
-    changeIconToMuteIcon();
-    audio.pause(); 
-}
-
-function changeIconToMuteIcon() {
-    let audioIcon = document.getElementById('audioIcon');
-    if (audioIcon) audioIcon.style.display = 'none';
-    let muteIcon = document.getElementById('muteIcon');
-    if (muteIcon) muteIcon.style.display = 'block';
-}
-
-function unmute() {
-    changeIconToUnmuteIcon();
-    audio.loop = true; 
-    audio.play(); 
-}
-
-function changeIconToUnmuteIcon() {
-    let audioIcon = document.getElementById('audioIcon');
-    if (audioIcon) audioIcon.style.display = 'block';
-    let muteIcon = document.getElementById('muteIcon');
-    if (muteIcon) muteIcon.style.display = 'none';
-}
 
 /**
  * Requests the browser to display the element with the ID 'fullscreen' in fullscreen mode.

@@ -1,4 +1,4 @@
-class DrawableObject {
+class DrawableObject extends AudioManager{
     x = 0;
     y = 50;
     height = 100;

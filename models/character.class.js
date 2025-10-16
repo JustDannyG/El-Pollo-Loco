@@ -7,8 +7,6 @@ class Character extends MovableObject {
     energy = 100;
     idleTicks = 0;
     idleThreshold = 50;
-    hurtAudio;
-    jumpAudio;
 
     imagesIdle = [
         './img/2_character_pepe/1_idle/idle/I-1.png',
@@ -83,17 +81,9 @@ class Character extends MovableObject {
         };
         this.deathFallingStarted = false;
         this.loadAllImages();
-        this.loadAudios();
         this.applyGravity();
         this.animate();
     };
-
-    loadAudios() {
-        this.hurtAudio = new Audio('./audio/795690__randbsoundbites__death-cry (1).wav');
-        this.hurtAudio.load();
-        this.jumpAudio = new Audio('./audio/345437__artmasterrich__male_jump_01.wav');
-        this.jumpAudio.load();
-    }
 
     /**
      * Loads all character animation images into memory.
@@ -192,7 +182,7 @@ class Character extends MovableObject {
                 this.playDeadAnimation();
             } else if (this.isHurt()) {
                 this.idleTicks = 0;
-                this.hurtAudio.play();
+                this.playHurtAudio();
                 this.playAnimation(this.imagesHurt);
             } else if (this.isAboveGround()) {
                 this.idleTicks = 0;
@@ -206,14 +196,30 @@ class Character extends MovableObject {
         }, 1000 / 10);
     }
 
+    playHurtAudio() {
+        if (audioManager && audioManager.hurtAudioStatusCharacter == true) {
+            this.hurtAudioCharacter.play();
+        } else {
+            this.hurtAudioCharacter.pause();
+        }
+    }
+
     /**
      * Initiates a jump by setting the vertical speed.
      * Sets the object's vertical speed (`speedY`) to 36, causing it to move upward.
      */
     jump() {
         this.speedY = 36;
-        this.jumpAudio.play();
+        this.playJumpAudio();
     };
+
+    playJumpAudio() {
+        if (audioManager && audioManager.jumpAudioStatusCharacter == true) {
+            this.jumpAudioCharacter.play();
+        } else {
+            this.jumpAudioCharacter.pause();
+        }
+    }
 
     /**
      * Plays the appropriate idle animation based on the number of idle ticks.
@@ -259,7 +265,10 @@ class Character extends MovableObject {
     }
 
     playDeadAudio() {
-        let audio = new Audio('./audio/796567__randbsoundbites__character-death.wav');
-        audio.play();
+        if (audioManager && audioManager.deadAudioStatusCharacter == true) {
+            this.deadAudioCharacter.play();
+        } else {
+            this.deadAudioCharacter.pause();
+        }
     }
 };
