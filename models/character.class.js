@@ -1,12 +1,14 @@
 class Character extends MovableObject {
-    
+
     height = 320;
     width = 160;
     speed = 10;
     world;
-    energy = 1000;
+    energy = 100;
     idleTicks = 0;
     idleThreshold = 50;
+    hurtAudio;
+    jumpAudio;
 
     imagesIdle = [
         './img/2_character_pepe/1_idle/idle/I-1.png',
@@ -81,9 +83,17 @@ class Character extends MovableObject {
         };
         this.deathFallingStarted = false;
         this.loadAllImages();
+        this.loadAudios();
         this.applyGravity();
         this.animate();
     };
+
+    loadAudios() {
+        this.hurtAudio = new Audio('./audio/795690__randbsoundbites__death-cry (1).wav');
+        this.hurtAudio.load();
+        this.jumpAudio = new Audio('./audio/345437__artmasterrich__male_jump_01.wav');
+        this.jumpAudio.load();
+    }
 
     /**
      * Loads all character animation images into memory.
@@ -128,6 +138,7 @@ class Character extends MovableObject {
             this.world.camera_x = -this.x + 120;
         }, 1000 / 60);
     }
+
 
     /**
      * Checks if the jump key is pressed and the character is on the ground.
@@ -181,6 +192,7 @@ class Character extends MovableObject {
                 this.playDeadAnimation();
             } else if (this.isHurt()) {
                 this.idleTicks = 0;
+                this.hurtAudio.play();
                 this.playAnimation(this.imagesHurt);
             } else if (this.isAboveGround()) {
                 this.idleTicks = 0;
@@ -193,6 +205,15 @@ class Character extends MovableObject {
             }
         }, 1000 / 10);
     }
+
+    /**
+     * Initiates a jump by setting the vertical speed.
+     * Sets the object's vertical speed (`speedY`) to 36, causing it to move upward.
+     */
+    jump() {
+        this.speedY = 36;
+        this.jumpAudio.play();
+    };
 
     /**
      * Plays the appropriate idle animation based on the number of idle ticks.
@@ -234,5 +255,11 @@ class Character extends MovableObject {
         setInterval(() => {
             this.y += 5;
         }, 1000 / 60);
+        this.playDeadAudio();
+    }
+
+    playDeadAudio() {
+        let audio = new Audio('./audio/796567__randbsoundbites__character-death.wav');
+        audio.play();
     }
 };

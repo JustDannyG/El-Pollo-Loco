@@ -5,6 +5,8 @@ class Endboss extends MovableObject {
     height = 330;
     width = 300;
     energy = 100;
+    hurtAudio;
+
 
     imagesWalking = [
         './img/4_enemie_boss_chicken/1_walk/G1.png',
@@ -64,9 +66,15 @@ class Endboss extends MovableObject {
         };
         this.deathFallingStarted = false;
         this.loadAllImages();
+        this.loadAudios();
         this.speed = 10;
         this.applyGravity();
         this.animate();
+    }
+
+    loadAudios() {
+        this.hurtAudio = new Audio('./audio/endboss-chicken-attack.wav');
+        this.hurtAudio.load();
     }
 
     /**
@@ -139,6 +147,7 @@ class Endboss extends MovableObject {
      */
     isHurtAnimation() {
         this.playAnimation(this.imagesHurt);
+        this.hurtAudio.play();
         if ((this.energy === 80 || this.energy === 60 || this.energy === 40 || this.energy === 20) && !this.attacking) {
             setTimeout(() => this.startAttack(), 500);
         }
@@ -160,6 +169,11 @@ class Endboss extends MovableObject {
         return;
     }
 
+    playIsDeadAudio() {
+        let audio = new Audio('./audio/enboss-chicken-dead.wav');
+        audio.play();
+    }
+
     /**
      * Initiates the death fall animation for the endboss character.
      * Continuously increases the vertical position (`y`) by 5 pixels at a rate of 60 frames per second,
@@ -171,6 +185,7 @@ class Endboss extends MovableObject {
         setInterval(() => {
             this.y += 5;
         }, 1000 / 60);
+        this.playIsDeadAudio();
     }
 
     /**

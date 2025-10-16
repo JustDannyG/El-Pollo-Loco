@@ -67,7 +67,7 @@ class World {
             this.checkPickup(this.level.coins, this.coinbar);
             this.checkPickup(this.level.bottles, this.bottlebar);
             this.checkBottleHitsEndboss();
-        }, 200);
+        }, 1000 / 60);
     };
 
     /**
@@ -122,13 +122,6 @@ class World {
         });
     };
 
-    /**
-     * Checks if the character is moving upwards and is positioned above the given enemy.
-     *
-     * @param {Object} enemy - The enemy object to compare the character's position against.
-     * @param {number} enemy.y - The y-coordinate of the enemy.
-     * @returns {boolean} True if the character is moving upwards and is above the enemy, otherwise false.
-     */
     checkCharacterY(enemy) {
         return this.character.speedY < 0 && (this.character.y + this.character.height - 80) < enemy.y;
     }

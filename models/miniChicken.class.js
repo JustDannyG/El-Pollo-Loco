@@ -23,8 +23,8 @@ class MiniChicken extends MovableObject {
         super();
         this.offset = {
             top: 0,
-            left: 5,
-            right: 5,
+            left: 10,
+            right: 10,
             bottom: 10
         };
         this.loadImage(this.imagesWalking[0]);

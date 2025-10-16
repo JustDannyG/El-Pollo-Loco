@@ -258,7 +258,27 @@ footer {
   gap: 2px;
 }
 
-@media only screen and (max-width: 1024px) {
+.audioIcon {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 21;
+  cursor: pointer;
+}
+
+.muteIcon {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 20;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 932px) {
   canvas {
     width: calc(100vw);
     max-width: 100%;

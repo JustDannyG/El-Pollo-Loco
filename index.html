@@ -46,6 +46,9 @@
     <div id="fullscreen">
         <canvas id="canvas" width="720" height="480"></canvas>
 
+        <img id="audioIcon" class="audioIcon hidden" src="/img/icon/audio-icon.png" onclick="mute()" alt="">
+        <img id="muteIcon" class="muteIcon" src="/img/icon/mute-icon.png" onclick="unmute()" alt="">
+
         <button id="playAgainBtn" class="playAgainBtn hidden" onclick="init()">Play again</button>
 
         <button class="fullscreenBtn" id="fullscreenBtn" onclick="openFullscreen()">

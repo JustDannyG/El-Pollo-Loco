@@ -2,7 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let fullscreen = false;
-
+let audio = new Audio('./audio/265615__zagi2__loca-salsa-2.wav');
 
 /**
  * Initializes the game by setting up the canvas, checking for mobile devices,
@@ -20,6 +20,31 @@ function init() {
     }
     world = new World(canvas, keyboard);
 };
+
+function mute() {
+    changeIconToMuteIcon();
+    audio.pause(); 
+}
+
+function changeIconToMuteIcon() {
+    let audioIcon = document.getElementById('audioIcon');
+    if (audioIcon) audioIcon.style.display = 'none';
+    let muteIcon = document.getElementById('muteIcon');
+    if (muteIcon) muteIcon.style.display = 'block';
+}
+
+function unmute() {
+    changeIconToUnmuteIcon();
+    audio.loop = true; 
+    audio.play(); 
+}
+
+function changeIconToUnmuteIcon() {
+    let audioIcon = document.getElementById('audioIcon');
+    if (audioIcon) audioIcon.style.display = 'block';
+    let muteIcon = document.getElementById('muteIcon');
+    if (muteIcon) muteIcon.style.display = 'none';
+}
 
 /**
  * Requests the browser to display the element with the ID 'fullscreen' in fullscreen mode.
@@ -83,8 +108,8 @@ function addFullscreenStyle() {
  */
 function addSmallscreenStyle() {
     fullscreen = false;
-    canvas.style.width = '720px';
-    canvas.style.height = '480px';
+    canvas.style.width = '730px';
+    canvas.style.height = '490px';
 };
 
 /**
@@ -152,22 +177,29 @@ function checkIfMobile() {
         || document.mozFullScreenElement
         || document.msFullscreenElement;
     if (isMobileWidth) {
-        showMobileControls();
-        showOverlayOnMobile();
-        hideElements();
-        hideImpressum();
+        mobileOverlay();
     } else {
-        hideMobileControls();
-        hideOverlayOnMobile();
-        showElements();
-        if (!isFullscreenActive()) {
-            showImpressum();
-        } else {
-            hideImpressum();
-        }
+        notMobileOverlay(isFullscreenActive);
     }
 };
 
+function notMobileOverlay(isFullscreenActive) {
+    hideMobileControls();
+    hideOverlayOnMobile();
+    showElements();
+    if (!isFullscreenActive()) {
+        showImpressum();
+    } else {
+        hideImpressum();
+    }
+}
+
+function mobileOverlay() {
+    showMobileControls();
+    showOverlayOnMobile();
+    hideElements();
+    hideImpressum();
+}
 
 /**
  * Displays the mobile controls by setting their display style to 'flex'.
@@ -244,7 +276,7 @@ function showElements() {
     let h1Element = document.querySelector('h1');
     if (h1Element) h1Element.style.display = 'block';
     let fullscreenImg = document.getElementById('fullscreenImg');
-    if (fullscreenImg) fullscreenImg.style.display = 'flex';
+    if (fullscreenImg) fullscreenImg.style.display = 'block';
 }
 
 function showImpressum() {

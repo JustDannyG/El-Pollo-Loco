@@ -58,14 +58,6 @@ class MovableObject extends DrawableObject {
     };
 
     /**
-     * Initiates a jump by setting the vertical speed.
-     * Sets the object's vertical speed (`speedY`) to 36, causing it to move upward.
-     */
-    jump() {
-        this.speedY = 36;
-    };
-
-    /**
      * Checks if this object is colliding with another movable object.
      *
      * @param {Object} mO - The other movable object to check collision against.

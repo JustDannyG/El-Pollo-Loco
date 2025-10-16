@@ -98,10 +98,16 @@ class ThrowableObject extends MovableObject {
     onGroundImpact() {
         this.stopAnimationtOtherDirection();
         this.isSplashing = true;
+        this.playAudioForBrokenBottle();
         let currentImage = 0;
         let animation = setInterval(() => {
             currentImage = this.isBottleImpact(currentImage, animation);
         }, 100);
+    }
+
+    playAudioForBrokenBottle() {
+        let audio = new Audio('./audio/213158__arnaud-coutancier__broken-bottle-verre-07.wav');
+        audio.play();
     }
 
     /**
