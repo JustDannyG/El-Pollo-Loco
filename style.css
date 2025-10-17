@@ -102,6 +102,11 @@ footer {
   background-color: #F48E16;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border: 2px solid black;
+}
+
+.startBtn:active {
+  transform: translate(-50%, -50%) scale(0.95);
 }
 
 .playAgainBtnContainer {
@@ -121,6 +126,11 @@ footer {
   background-color: #F48E16;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border: 2px solid black;
+}
+
+.playAgainBtn:active {
+  transform: scale(0.95);
 }
 
 .playAgainBtnImg {
@@ -136,6 +146,11 @@ footer {
   background-color: #F48E16;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border: 2px solid black;
+}
+
+.homeBtn:active {
+  transform: scale(0.95);
 }
 
 .homeBtnImg {

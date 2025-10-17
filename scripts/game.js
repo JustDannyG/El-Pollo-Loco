@@ -12,13 +12,32 @@ let fullscreen = false;
  */
 function init() {
     canvas = document.getElementById('canvas');
-    hidePlayAgainBtnContainer();
-    showStartBtn();
-    checkIfMobile();
-    handleOrientationChange(mediaQuery);
+    handleBtns();
+    handleMediaQuery();
     if (world && world.stop) world.stop();
     world = new World(canvas, keyboard);
 };
+
+/**
+ * Handles the visibility of game control buttons by hiding the "Play Again" button container
+ * and showing the "Start" button.
+ */
+function handleBtns() {
+    hidePlayAgainBtnContainer();
+    showStartBtn();
+}
+
+/**
+ * Handles media query changes by checking if the device is mobile
+ * and responding to orientation changes.
+ *
+ * Calls `checkIfMobile()` to determine device type and
+ * `handleOrientationChange(mediaQuery)` to handle orientation changes.
+ */
+function handleMediaQuery() {
+    checkIfMobile();
+    handleOrientationChange(mediaQuery);
+}
 
 /**
  * Requests the browser to display the element with the ID 'fullscreen' in fullscreen mode.
@@ -157,6 +176,12 @@ function checkIfMobile() {
     }
 };
 
+/**
+ * Handles the display of overlays and controls for non-mobile devices,
+ * toggling elements based on fullscreen activity.
+ *
+ * @param {function(): boolean} isFullscreenActive - A function that returns true if fullscreen mode is active, false otherwise.
+ */
 function notMobileOverlay(isFullscreenActive) {
     hideMobileControls();
     hideOverlayOnMobile();
@@ -168,6 +193,10 @@ function notMobileOverlay(isFullscreenActive) {
     }
 }
 
+/**
+ * Handles the display of mobile-specific overlays and controls.
+ * Shows mobile controls and overlay, hides unnecessary elements and the impressum section.
+ */
 function mobileOverlay() {
     showMobileControls();
     showOverlayOnMobile();
@@ -209,6 +238,10 @@ function hideElements() {
     hideImpressum();
 }
 
+/**
+ * Hides the HTML element with the ID 'impressum' by setting its display style to 'none'.
+ * If the element does not exist, the function does nothing.
+ */
 function hideImpressum() {
     let impressum = document.getElementById('impressum');
     if (impressum) impressum.style.display = 'none';
@@ -253,6 +286,10 @@ function showElements() {
     if (fullscreenImg) fullscreenImg.style.display = 'block';
 }
 
+/**
+ * Displays the Impressum section by setting its display style to 'flex'.
+ * Assumes there is an element with the ID 'impressum' in the DOM.
+ */
 function showImpressum() {
     let impressum = document.getElementById('impressum');
     if (impressum) impressum.style.display = 'flex';
@@ -276,25 +313,41 @@ function closeImpressum() {
     if (modal) modal.classList.add('hidden');
 };
 
+/**
+ * Starts the game by initializing the game world and hiding the start button.
+ */
 function startGame() {
     world.startGame();
     hideStartBtn();
 }
 
+/**
+ * Displays the start button by removing the 'hidden' class from the element with ID 'startBtn'.
+ */
 function showStartBtn() {
     let startBtn = document.getElementById('startBtn');
     startBtn.classList.remove('hidden');
 }
 
+/**
+ * Hides the start button by adding the 'hidden' class to its element.
+ * Assumes there is an element with the ID 'startBtn' in the DOM.
+ */
 function hideStartBtn() {
     let startBtn = document.getElementById('startBtn');
     startBtn.classList.add('hidden');
 }
 
+/**
+ * Restarts the game by stopping the current world, hiding the play again button,
+ * reinitializing the level, creating a new world and character, and starting the game loop.
+ *
+ * @function
+ */
 function restartGame() {
     if (world && world.stop) world.stop();
     hidePlayAgainBtnContainer();
-    if (typeof initLevel === 'function') initLevel();
+    initLevel?.();
     world = new World(canvas, keyboard);
     if (typeof level1 !== 'undefined') world.level = level1;
     world.character = new Character();
@@ -303,6 +356,10 @@ function restartGame() {
     world.run();
 }
 
+/**
+ * Hides the "Play Again" and "Home" button containers by adding the 'hidden' class to their elements.
+ * Assumes elements with IDs 'playAgainBtn' and 'homeBtn' exist in the DOM.
+ */
 function hidePlayAgainBtnContainer() {
     let playAgainBtn = document.getElementById('playAgainBtn');
     playAgainBtn.classList.add('hidden');

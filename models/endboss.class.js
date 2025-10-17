@@ -4,7 +4,7 @@ class Endboss extends MovableObject {
     x = 6500;
     height = 330;
     width = 300;
-    energy = 10;
+    energy = 100;
     hurtAudio;
     deadAudio;
 
@@ -72,6 +72,10 @@ class Endboss extends MovableObject {
         this.animate();
     }
 
+    /**
+     * Loads audio files for the endboss character, including hurt and dead sounds.
+     * Initializes `hurtAudio` and `deadAudio` properties with corresponding audio objects.
+     */
     loadAudios() {
         this.hurtAudio = new Audio('./audio/endboss-chicken-attack.wav');
         this.hurtAudio.load();
@@ -156,6 +160,10 @@ class Endboss extends MovableObject {
         return;
     }
 
+    /**
+     * Plays or pauses the hurt audio for the endboss based on the audio manager's status.
+     * If `audioManager.hurtAudioStatusEndboss` is `true`, the hurt audio is played; otherwise, it is paused.
+     */
     playHurtAudio() {
         if (audioManager && audioManager.hurtAudioStatusEndboss == true) {
             this.hurtAudio.play();
@@ -193,6 +201,10 @@ class Endboss extends MovableObject {
         this.playDeadAudio();
     }
 
+    /**
+     * Plays or pauses the endboss dead audio based on the audio manager's status.
+     * If `audioManager.deadAudioStatusEndboss` is `true`, the dead audio is played; otherwise, it is paused.
+     */
     playDeadAudio() {
         if (audioManager && audioManager.deadAudioStatusEndboss == true) {
             this.deadAudio.play();

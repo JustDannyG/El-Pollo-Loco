@@ -36,13 +36,25 @@ class ThrowableObject extends MovableObject {
         };
         this.x = x;
         this.y = y;
-        this.loadImage(this.throwImages[0]);
-        this.loadImages(this.throwImages);
-        this.loadImages(this.throwImagesImpact);
+        this.loadAllImages();
         this.loadAudios();
         this.throw(100, 150);
     };
 
+    /**
+     * Loads all images required for the throwable object, including the initial image,
+     * all throw animation images, and all impact animation images.
+     */
+    loadAllImages() {
+        this.loadImage(this.throwImages[0]);
+        this.loadImages(this.throwImages);
+        this.loadImages(this.throwImagesImpact);
+    }
+
+    /**
+     * Loads the splash audio file for the throwable object.
+     * Initializes the Audio object and preloads the audio resource.
+     */
     loadAudios() {
         this.splashAudio = new Audio('./audio/213158__arnaud-coutancier__broken-bottle-verre-07.wav');
         this.splashAudio.load();
@@ -112,6 +124,11 @@ class ThrowableObject extends MovableObject {
         }, 100);
     }
 
+    /**
+     * Plays or pauses the splash audio for the throwable object based on the audio manager's bottle splash audio status.
+     * If the audio manager exists and bottle splash audio is enabled, the splash audio is played.
+     * Otherwise, the splash audio is paused.
+     */
     playSplashAudio() {
         if (audioManager && audioManager.bottleSplashAudioStatus == true) {
             this.splashAudio.play();

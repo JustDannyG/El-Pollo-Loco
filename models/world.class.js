@@ -117,6 +117,13 @@ class World {
         });
     };
 
+    /**
+     * Checks if the character is moving upwards and is positioned above the given enemy.
+     *
+     * @param {Object} enemy - The enemy object to compare the character's position against.
+     * @param {number} enemy.y - The vertical position of the enemy.
+     * @returns {boolean} True if the character is moving up and is above the enemy, otherwise false.
+     */
     checkCharacterY(enemy) {
         return this.character.speedY < 0 && (this.character.y + this.character.height - 80) < enemy.y;
     }
@@ -256,19 +263,6 @@ class World {
         this.showGameOverScreen();
     };
 
-    showYouWonScreen() {
-        if (this.endboss && this.endboss.energy == 0) {
-            this.gameOver = true;
-            let youWonScreen = new YouWonScreen();
-            this.addToMap(youWonScreen);
-            this.showPlayAgainButtons();
-            setTimeout(() => {
-                this.stop();
-            }, 1000);
-            return;
-        };
-    };
-
     /**
      * Displays the game over screen when the character's energy reaches zero.
      * Sets the game over state, adds the game over screen to the map,
@@ -282,7 +276,7 @@ class World {
             this.showPlayAgainButtons();
             setTimeout(() => {
                 this.stop();
-            }, 900);
+            }, 1000);
             return;
         }
     };
@@ -385,5 +379,25 @@ class World {
             mO.x = mO.x * -1;
             this.ctx.restore();
         }
+    };
+
+    /**
+     * Displays the "You Won" screen when the endboss is defeated.
+     * Sets the game over state, adds the victory screen to the map,
+     * shows play again buttons, and stops the game after a short delay.
+     *
+     * @returns {void}
+     */
+    showYouWonScreen() {
+        if (this.endboss && this.endboss.energy == 0) {
+            this.gameOver = true;
+            let youWonScreen = new YouWonScreen();
+            this.addToMap(youWonScreen);
+            this.showPlayAgainButtons();
+            setTimeout(() => {
+                this.stop();
+            }, 1000);
+            return;
+        };
     };
 };

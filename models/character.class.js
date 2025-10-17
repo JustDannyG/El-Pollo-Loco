@@ -4,7 +4,7 @@ class Character extends MovableObject {
     width = 160;
     speed = 10;
     world;
-    energy = 10;
+    energy = 100;
     idleTicks = 0;
     idleThreshold = 50;
     hurtAudio;
@@ -89,6 +89,10 @@ class Character extends MovableObject {
         this.animate();
     };
 
+    /**
+     * Loads audio files for character actions (hurt, jump, dead) and initializes their Audio objects.
+     * The audio files are preloaded for immediate playback.
+     */
     loadAudios() {
         this.hurtAudio = new Audio('./audio/795690__randbsoundbites__death-cry (1).wav');
         this.hurtAudio.load();
@@ -209,6 +213,12 @@ class Character extends MovableObject {
         }, 1000 / 10);
     }
 
+    /**
+     * Plays or pauses the character's hurt audio based on the audio manager's status.
+     *
+     * If `audioManager.hurtAudioStatusCharacter` is `true`, the hurt audio is played.
+     * Otherwise, the hurt audio is paused.
+     */
     playHurtAudio() {
         if (audioManager && audioManager.hurtAudioStatusCharacter == true) {
             this.hurtAudio.play();
@@ -226,6 +236,10 @@ class Character extends MovableObject {
         this.playJumpAudio();
     };
 
+    /**
+     * Plays or pauses the character's jump audio based on the audio manager's jump audio status.
+     * If `audioManager.jumpAudioStatusCharacter` is `true`, the jump audio is played; otherwise, it is paused.
+     */
     playJumpAudio() {
         if (audioManager && audioManager.jumpAudioStatusCharacter == true) {
             this.jumpAudio.play();
@@ -277,6 +291,11 @@ class Character extends MovableObject {
         this.playDeadAudio();
     }
 
+    /**
+     * Plays or pauses the character's dead audio based on the audio manager's status.
+     * If `audioManager.deadAudioStatusCharacter` is `true`, the dead audio is played.
+     * Otherwise, the dead audio is paused.
+     */
     playDeadAudio() {
         if (audioManager && audioManager.deadAudioStatusCharacter == true) {
             this.deadAudio.play();
