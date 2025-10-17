@@ -4,7 +4,7 @@ class Character extends MovableObject {
     width = 160;
     speed = 10;
     world;
-    energy = 100;
+    energy = 10;
     idleTicks = 0;
     idleThreshold = 50;
     hurtAudio;

@@ -42,15 +42,22 @@
 
     <h1>El Pollo Loco</h1>
 
-    <p id="howToStartGame" class="howToStartGame">press to start</p>
-
     <div id="fullscreen">
         <canvas id="canvas" width="720" height="480"></canvas>
 
-        <img id="audioIcon" class="audioIcon hidden" src="/img/icon/audio-icon.png" onclick="mute()" alt="">
-        <img id="muteIcon" class="muteIcon" src="/img/icon/mute-icon.png" onclick="unmute()" alt="">
+        <img id="audioIcon" class="audioIcon hidden" src="./img/icon/audio-icon.png" onclick="mute()" alt="">
+        <img id="muteIcon" class="muteIcon" src="./img/icon/mute-icon.png" onclick="unmute()" alt="">
 
-        <button id="playAgainBtn" class="playAgainBtn hidden" onclick="init()">Play again</button>
+        <button onclick="startGame()" id="startBtn" class="startBtn">start</button>
+
+        <div class="playAgainBtnContainer">
+            <button id="playAgainBtn" class="playAgainBtn hidden" onclick="restartGame()">
+                <img class="playAgainBtnImg" src="./img/icon/play-again.png" alt="">
+            </button>
+            <button id="homeBtn" class="homeBtn hidden" onclick="init()" onclick="hidePlayAgainBtnContainer()">
+                <img class="homeBtnImg" src="./img/icon/home.png" alt="">
+            </button>
+        </div>
 
         <button class="fullscreenBtn" id="fullscreenBtn" onclick="openFullscreen()">
             <img id="fullscreenImg" src="./img/icon/fullscreen-enter.svg" alt="Fullscreen Button">
@@ -112,11 +119,9 @@
                     <p class="mobileBtnJump">^</p>
                 </button>
                 <button class="mobileBtn" id="throwBtn">
-                    <p class="mobileBtnLeftRightThrow">=></p>
+                    <img class="mobileBtnThrow" src="./img/icon/arrow_white_icon_512.png" alt="">
                 </button>
-
             </div>
-
         </div>
 
         <div id="overlay" class="overlay hidden" onclick="if (event.target === this) hideOverlayOnMobile()">

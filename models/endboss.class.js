@@ -4,7 +4,7 @@ class Endboss extends MovableObject {
     x = 6500;
     height = 330;
     width = 300;
-    energy = 100;
+    energy = 10;
     hurtAudio;
     deadAudio;
 

@@ -12,11 +12,11 @@ let fullscreen = false;
  */
 function init() {
     canvas = document.getElementById('canvas');
+    hidePlayAgainBtnContainer();
+    showStartBtn();
     checkIfMobile();
     handleOrientationChange(mediaQuery);
-    if (world && world.stop) {
-        world.stop();
-    }
+    if (world && world.stop) world.stop();
     world = new World(canvas, keyboard);
 };
 
@@ -69,8 +69,8 @@ function closeFullscreen() {
  */
 function addFullscreenStyle() {
     fullscreen = true;
-    canvas.style.width = '100vw';
-    canvas.style.height = '100vh';
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
 };
 
 /**
@@ -143,7 +143,7 @@ function handleOrientationChange(e) {
  * - Shows the impressum only on desktop when not in fullscreen mode.
  */
 function checkIfMobile() {
-    let isMobileWidth = window.innerWidth <= 1024;
+    let isMobileWidth = window.innerWidth <= 932;
     let isFullscreenActive = () =>
         fullscreen
         || document.fullscreenElement
@@ -275,3 +275,37 @@ function closeImpressum() {
     let modal = document.getElementById('impressumModal');
     if (modal) modal.classList.add('hidden');
 };
+
+function startGame() {
+    world.startGame();
+    hideStartBtn();
+}
+
+function showStartBtn() {
+    let startBtn = document.getElementById('startBtn');
+    startBtn.classList.remove('hidden');
+}
+
+function hideStartBtn() {
+    let startBtn = document.getElementById('startBtn');
+    startBtn.classList.add('hidden');
+}
+
+function restartGame() {
+    if (world && world.stop) world.stop();
+    hidePlayAgainBtnContainer();
+    if (typeof initLevel === 'function') initLevel();
+    world = new World(canvas, keyboard);
+    if (typeof level1 !== 'undefined') world.level = level1;
+    world.character = new Character();
+    world.setWorld();
+    world.mouseClicked = true;
+    world.run();
+}
+
+function hidePlayAgainBtnContainer() {
+    let playAgainBtn = document.getElementById('playAgainBtn');
+    playAgainBtn.classList.add('hidden');
+    let homeBtn = document.getElementById('homeBtn');
+    homeBtn.classList.add('hidden');
+}

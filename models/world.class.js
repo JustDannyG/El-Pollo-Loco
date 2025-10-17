@@ -29,7 +29,6 @@ class World {
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.running = true;
-        this.startGame();
         this.draw();
     };
 
@@ -44,15 +43,11 @@ class World {
      */
     startGame() {
         this.hidePlayAgainButton();
-        this.canvas.onclick = () => {
-            this.mouseClicked = true;
-            this.canvas.onclick = null;
-            initLevel();
-            this.level = level1;
-            this.character = new Character();
-            this.setWorld();
-            this.run();
-        };
+        initLevel();
+        this.level = level1;
+        this.character = new Character();
+        this.setWorld();
+        this.run();
     }
 
     /**
@@ -266,7 +261,7 @@ class World {
             this.gameOver = true;
             let youWonScreen = new YouWonScreen();
             this.addToMap(youWonScreen);
-            this.showPlayAgainButton();
+            this.showPlayAgainButtons();
             setTimeout(() => {
                 this.stop();
             }, 1000);
@@ -284,10 +279,10 @@ class World {
             this.gameOver = true;
             let gameOverScreen = new GameOverScreen();
             this.addToMap(gameOverScreen);
-            this.showPlayAgainButton();
+            this.showPlayAgainButtons();
             setTimeout(() => {
                 this.stop();
-            }, 1000);
+            }, 900);
             return;
         }
     };
@@ -311,9 +306,11 @@ class World {
      * Displays the "Play Again" button by removing the 'hidden' class
      * from the element with the ID 'playAgainBtn'.
      */
-    showPlayAgainButton() {
+    showPlayAgainButtons() {
         let btn = document.getElementById('playAgainBtn');
         btn.classList.remove('hidden');
+        let homeBtn = document.getElementById('homeBtn');
+        homeBtn.classList.remove('hidden');
     }
 
     /**
@@ -323,6 +320,8 @@ class World {
     hidePlayAgainButton() {
         let btn = document.getElementById('playAgainBtn');
         btn.classList.add('hidden');
+        let homeBtn = document.getElementById('homeBtn');
+        homeBtn.classList.add('hidden');
     };
 
     /**
